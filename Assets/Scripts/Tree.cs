@@ -61,6 +61,9 @@ public class Tree : MonoBehaviour {
 	//	return 5 + (int)(grown_percentage * 5f);
 	//}
 	
+	public void OnSpray() {
+	}
+	
 	public void OnAxe() {
 		print("OnAxe");
 		axe_shake_amount = 1;
