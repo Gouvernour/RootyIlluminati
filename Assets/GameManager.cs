@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    Transform spawnPositionsParent;
+
     List<GameObject> players = new List<GameObject>();
 
     private void Awake()
@@ -19,7 +21,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
     }
@@ -33,5 +35,27 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("RasmusCorneer");
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].transform.position = spawnPositionsParent.GetChild(i).position;
+            players[i].GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(i);
+        }
+    }
+
+    private void OnDisable()
+    {
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
     }
 }
