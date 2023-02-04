@@ -7,29 +7,30 @@ public enum ToolType
 {
     Axe,
     WaterGun,
-    BugSpray,
-    Fertilizer,
-    Shovel
+    BugSpray
 }
 public class Tool : MonoBehaviour
 {
     CapsuleCollider2D col;
-    Vector3 rotationSpeed = new Vector3(0, 0, 3);
+    
+    Vector3 throwVector = Vector3.left;
     public Transform _parent;
-    public float raycastDistance;
+    public float rayastDistance;
     bool thrown = false;
     public ToolType tool;
     public int Damage;
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 
+	public Collider2D eero_collider;
+
     private void Start()
     {
         if(col == null)
         {
             col = gameObject.AddComponent<CapsuleCollider2D>();
+            col.isTrigger = true;
         }
-        col.isTrigger = true;
     }
 
     public void Update()
@@ -49,52 +50,43 @@ public class Tool : MonoBehaviour
         switch (tool)
         {
             case ToolType.Axe:
+<<<<<<< Updated upstream
                 //Melee
-
-                hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance * 3);
+                hits = Physics2D.RaycastAll(origin: transform.position, direction, rayastDistance);
                 //If hit => Do Damage
-                foreach (RaycastHit2D hit in hits)
-                {
-                    if(hit.collider.gameObject.tag == "Player")
-                    {
-                        hit.transform.gameObject.GetComponent<Movement>().Killed();
-                    }
-                    else if (hit && hit.transform.tag == "Tree")
-                    {
-                        hit.transform.gameObject.GetComponent<Tree>().OnAxe();
-                    }
-                }
+                //if(hit && hit.collider.transform.tag == "Player")
+                //{
+                //    hit.transform.gameObject.GetComponent<Movement>().Killed();
+                //}else if(hit && hit.collider.transform.tag == "Tree")
+                //{
+                //    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
+                //}
+=======
+				// @eero
+ 				Collider2D[] colliders = new Collider2D[10];
+				ContactFilter2D contactFilter = new ContactFilter2D();
+				int colliderCount = eero_collider.OverlapCollider(contactFilter, colliders);
+				for (int i=0; i<colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Tree") {
+						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
+					}
+				}
+>>>>>>> Stashed changes
                 break;
             case ToolType.WaterGun:
                 //Water
-                hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance * 5);
+                //hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
                 //If hit == Player Do Damage
-                foreach(RaycastHit2D hit in hits)
-                {
-                    if(hit.collider.gameObject.tag == "Player")
-                    {
-
-                    }else if(hit.collider.gameObject.tag == "Tree")
-                    {
-                        hit.transform.gameObject.GetComponent<Tree>().OnWater();
-                    }
-                }
                 //Else if hit == tree => Give Water
                 break;
             case ToolType.BugSpray:
                 //Pesticide
                 break;
-            case ToolType.Fertilizer:
-
             default:
                 break;
         }
     }
 
-    public void Throw(Vector2 Direction)
-    {
-        transform.parent = null;
-    }
 
     public void Drop()
     {
@@ -115,8 +107,7 @@ public class Tool : MonoBehaviour
 
     public void Throw(Transform parent, Vector2 direction)
     {
-        transform.parent = null;
-        if (transform.parent == parent)
+        if(transform.parent == parent)
         {
             transform.parent = null;
             StartCoroutine(Throwing(direction));
@@ -151,22 +142,17 @@ public class Tool : MonoBehaviour
         }
         while (thrown)
         {
-            hits = Physics2D.RaycastAll(transform.position, direction, raycastDistance);
+            hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
-                if (h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
+                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
                 {
                     thrown = false;
                     //Do damage to hit player
-                    if (h.collider.gameObject.tag == "Player")
-                    {
-                        h.collider.GetComponent<Movement>().KnockBack(transform.position);
-
-                    }
                 }
                 else
                 {
-                    transform.Rotate(rotationSpeed);
+                    transform.Rotate(new Vector3(0, 0, 3));
                     transform.position += direction * Time.deltaTime * 10;
                 }
             }
