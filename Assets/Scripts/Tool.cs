@@ -24,11 +24,14 @@ public class Tool : MonoBehaviour
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
+	
 	public Collider2D eero_collider;
 	public Sprite[] eero_sprite_per_tool_type;
 	Vector3 eero_parent_prev_frame_position;
 	float eero_localScale_start;
 	float eero_tool_shake_amount = 0;
+	
+	public Object hole;
 	
     private void Start()
     {
@@ -97,6 +100,11 @@ public class Tool : MonoBehaviour
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
+				
+			case ToolType.Shovel:
+				
+				break;
+				
             //case ToolType.BugSpray:
             //    //Pesticide
             //    break;
