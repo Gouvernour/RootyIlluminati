@@ -149,6 +149,19 @@ public class Tool : MonoBehaviour
             //case ToolType.BugSpray:
             //    //Pesticide
             //    break;
+            case ToolType.BugSpray:
+                for (int i = 0; i < colliderCount; i++)
+                {
+                    if (colliders[i].gameObject.tag == "Tree")
+                    {
+                        colliders[i].gameObject.GetComponent<Tree>().OnSpray();
+                    }
+                    else if (colliders[i].gameObject.tag == "Playyer")
+                    {
+                        //colliders[i].gameObject.GetComponent<Movement>().Killed();
+                    }
+                }
+                break;
             default:
 				print("TODO!!!!!!!!!!!!!");
                 break;
