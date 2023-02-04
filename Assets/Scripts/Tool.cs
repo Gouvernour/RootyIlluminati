@@ -8,7 +8,8 @@ public enum ToolType
     Axe,
     WaterGun,
     BugSpray,
-    Fertilizer
+    Fertilizer,
+    Shovel
 }
 public class Tool : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class Tool : MonoBehaviour
         {
             case ToolType.Axe:
                 //Melee
+
                 hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance * 3);
                 //If hit => Do Damage
                 foreach (RaycastHit2D hit in hits)
@@ -82,6 +84,8 @@ public class Tool : MonoBehaviour
             case ToolType.BugSpray:
                 //Pesticide
                 break;
+            case ToolType.Fertilizer:
+
             default:
                 break;
         }
