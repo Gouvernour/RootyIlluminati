@@ -135,6 +135,11 @@ public class Tool : MonoBehaviour
                 {
                     thrown = false;
                     //Do damage to hit player
+                    if (h.collider.gameObject.tag == "Player")
+                    {
+                        h.collider.GetComponent<Movement>().KnockBack(transform.position);
+
+                    }
                 }
                 else
                 {
