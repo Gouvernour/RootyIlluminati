@@ -11,6 +11,7 @@ public enum ToolType
 }
 public class Tool : MonoBehaviour
 {
+    public Collider2D collider;
     bool thrown = false;
     public ToolType tool;
     public int Damage;
@@ -51,7 +52,7 @@ public class Tool : MonoBehaviour
         return this;
     }
 
-    public void throwing(Vector2 Direction)
+    public IEnumerator throwing(Vector2 Direction)
     {
         Vector3 direction = Vector3.left;
         thrown = true;
@@ -77,7 +78,13 @@ public class Tool : MonoBehaviour
                 }
                 break;
         }
-        Collider2D col;
-        RaycastHit2D hit = Physics.Raycast(transform.position, direction, 1f, );
+        if(Physics.Raycast(transform.position, direction, 5))
+        {
+
+        }else
+        {
+            transform.position += direction;
+        }
+        yield return null;
     }
 }
