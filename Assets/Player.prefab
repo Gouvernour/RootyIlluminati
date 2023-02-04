@@ -125,6 +125,7 @@ MonoBehaviour:
   dashSpeed: 15
   knockBackDuration: 0.1
   knockBackSpeed: 20
+  respawnDuration: 5
   spawnPoint: {fileID: 0}
 --- !u!61 &5642315583656586727
 BoxCollider2D:
