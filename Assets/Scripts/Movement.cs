@@ -34,13 +34,17 @@ public class Movement : MonoBehaviour
     public float knockBackDuration;
     public float knockBackSpeed;
 
+    //tools
+    Tool currentTool;
+    bool useTriggered;
+    bool usePressed;
+
     //hp and spawn
     bool dead;
     float respawnTimer;
     public float respawnDuration;
     [HideInInspector] public Transform spawnPoint;
 
-    Tool currentTool;
 
     public void OnMove(InputAction.CallbackContext _ctx)
     {
@@ -63,8 +67,7 @@ public class Movement : MonoBehaviour
         if (!currentTool)
             return;
 
-        currentTool.Use(lastDir);
-        currentTool = null;
+        useTriggered = _ctx.action.triggered;
     }
 
     public void OnThrow(InputAction.CallbackContext _ctx)
@@ -84,7 +87,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-
+        //dash things
         if (dashTriggered && !dashPressed)
         {
             if ((currentState == MovementState.still || currentState == MovementState.moving))
@@ -95,6 +98,17 @@ public class Movement : MonoBehaviour
         else if (!dashTriggered && dashPressed)
         {
             dashPressed = false;
+        }
+
+        //tool use things
+        if (useTriggered && !usePressed)
+        {
+            currentTool.Use(lastDir);
+            usePressed = true;
+        }
+        else if (!useTriggered && usePressed)
+        {
+            usePressed = false;
         }
 
         if (dead)

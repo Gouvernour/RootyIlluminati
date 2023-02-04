@@ -10,6 +10,7 @@ public enum ToolType
     Fertilizer,
     Shovel,
     SeedBag,
+    BugSpray
 }
 public class Tool : MonoBehaviour
 {
@@ -89,7 +90,10 @@ public class Tool : MonoBehaviour
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Tree") {
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
-					}
+					}else if(colliders[i].gameObject.tag == "Playyer")
+                    {
+                        colliders[i].gameObject.GetComponent<Movement>().Killed();
+                    }
 				}
 				
 				eero_tool_shake_amount = 1;
@@ -176,6 +180,21 @@ public class Tool : MonoBehaviour
                 {
                     thrown = false;
                     //Do damage to hit player
+                    if(h.collider.gameObject.tag == "Player")
+                    {
+                        switch (tool)
+                        {
+                            case ToolType.Axe:
+                                h.collider.gameObject.GetComponent<Movement>().Killed();
+                                break;
+                            case ToolType.WaterGun:
+                                break;
+                            case ToolType.BugSpray:
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
                 else
                 {

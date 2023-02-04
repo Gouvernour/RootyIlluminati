@@ -152,11 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acc: 0.5
   decc: 0.35
-  maxVel: 5
+  maxVel: 10
   dashDuration: 0.1
-  dashSpeed: 15
+  dashSpeed: 30
   knockBackDuration: 0.1
-  knockBackSpeed: 20
+  knockBackSpeed: 40
   respawnDuration: 5
   spawnPoint: {fileID: 0}
 --- !u!61 &5642315583656586727
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.37, y: 4.74}
   m_EdgeRadius: 0
 --- !u!50 &-5850551447723665271
 Rigidbody2D:
@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157942267535220422}
   - component: {fileID: 7814569281690047544}
+  - component: {fileID: 1065152706476485184}
   m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
@@ -279,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f95db9697636548918d6253b5989ced0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -290,3 +291,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1065152706476485184
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526625484189405861}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7761c5b0083621645a0891d51057c34c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
