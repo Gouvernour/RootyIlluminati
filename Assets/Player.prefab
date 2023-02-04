@@ -101,6 +101,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7086bb78-4b6d-4e1b-946c-e48b11d13934
     m_ActionName: Player/Dash[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5554057516308328427}
+        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
+        m_MethodName: OnUse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 468a14a3-fbd5-4da7-8436-dcc4426dfe2f
+    m_ActionName: Player/Use[/DualShock4GamepadHID/buttonWest,/DualShock4GamepadHID/rightTrigger,/Keyboard/z,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5554057516308328427}
+        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
+        m_MethodName: OnThrow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0b1a0e1e-846b-4154-a97f-dafc113ec5e0
+    m_ActionName: Player/Throw[/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID/leftTrigger,/Keyboard/x,/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -125,6 +157,7 @@ MonoBehaviour:
   dashSpeed: 15
   knockBackDuration: 0.1
   knockBackSpeed: 20
+  respawnDuration: 5
   spawnPoint: {fileID: 0}
 --- !u!61 &5642315583656586727
 BoxCollider2D:

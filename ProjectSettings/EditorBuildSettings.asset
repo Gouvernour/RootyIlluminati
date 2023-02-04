@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RasmusCorneer.unity
     guid: 72a18ffe30fc19e4297c67447abce227
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 0e8e5c26de9dd0641b0376884b4ea2f1
   m_configObjects: {}
