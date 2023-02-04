@@ -115,10 +115,10 @@ public class Tree : MonoBehaviour {
 		
 		if (active_wishes_remaining == 0 && grown_percentage < 1f) { // should grow?
 			
-			if (next_wish_timer < 0) {
-				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
-				active_wishes_remaining = 3;
-			}
+			//if (next_wish_timer < 0) {
+			//	active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
+			//	active_wishes_remaining = 3;
+			//}
 			
 			int sprite_index = (int)(grown_percentage * sprites.Length);
 			sprite_renderer.sprite = sprites[sprite_index % sprites.Length];
@@ -126,7 +126,7 @@ public class Tree : MonoBehaviour {
 			grown_percentage += 0.15f*Time.fixedDeltaTime;
 			//grown_percentage += 0.02f*Time.fixedDeltaTime;
 			
-			float s = 0.4f*grown_percentage + 0.2f;
+			float s = 0.2f*grown_percentage + 1f;
 			root.transform.localScale = new Vector3(s, s, 1);	
 			WishCloud.transform.localPosition = new Vector3(0, grown_percentage * 3.2f + 0.9f, 0);
 		}
