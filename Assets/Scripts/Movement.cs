@@ -214,15 +214,6 @@ public class Movement : MonoBehaviour
         currentState = MovementState.still;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Killed();
-            KnockBack(collision.transform.position);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Wall")

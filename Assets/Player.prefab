@@ -155,7 +155,7 @@ MonoBehaviour:
   maxVel: 10
   dashDuration: 0.1
   dashSpeed: 30
-  knockBackDuration: 0.1
+  knockBackDuration: 0.15
   knockBackSpeed: 40
   respawnDuration: 5
   spawnPoint: {fileID: 0}

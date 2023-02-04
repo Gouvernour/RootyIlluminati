@@ -18,10 +18,10 @@ public class Tool : MonoBehaviour
     
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
-    public float rayastDistance;
+    public float rayastDistance = .8f;
     bool thrown = false;
     public ToolType tool;
-    public int Damage;
+    public int Damage = 1;
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
@@ -59,7 +59,7 @@ public class Tool : MonoBehaviour
     }
 	
 	public void FixedUpdate() {
-		if (_parent) {
+		if (_parent && !thrown ) {
 			eero_tool_shake_amount *= 0.9f;
 			
 			Vector3 delta = _parent.gameObject.GetComponent<Movement>().GetLastDir();
@@ -102,7 +102,18 @@ public class Tool : MonoBehaviour
                 break;
             case ToolType.WaterGun:
                 //Water
-                //hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
+                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance * 5);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if(hit.collider.gameObject.tag == "Tree")
+                    {
+                        hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                    }
+                    if(hit.collider.gameObject.tag == "Player")
+                    {
+                        hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
+                    }
+                }
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
@@ -141,8 +152,7 @@ public class Tool : MonoBehaviour
 
     public void Drop()
     {
-        transform.parent = null;
-
+        _parent = null;
     }
 
     public Tool PickUp(Transform player)
@@ -158,9 +168,8 @@ public class Tool : MonoBehaviour
 
     public void Throw(Transform parent, Vector2 direction)
     {
-        if(transform.parent == parent)
+        if(_parent == parent)
         {
-            transform.parent = null;
             StartCoroutine(Throwing(direction));
         }
     }
@@ -200,8 +209,10 @@ public class Tool : MonoBehaviour
                 {
                     thrown = false;
                     //Do damage to hit player
-                    if(h.collider.gameObject.tag == "Player")
+                    if (h.collider.gameObject.tag == "Player")
                     {
+                        h.collider.gameObject.GetComponent<Movement>().KnockBack(transform.position);
+
                         switch (tool)
                         {
                             case ToolType.Axe:
@@ -215,11 +226,13 @@ public class Tool : MonoBehaviour
                                 break;
                         }
                     }
+
+                    _parent = null;
                 }
                 else
                 {
                     transform.Rotate(new Vector3(0, 0, 3));
-                    transform.position += direction * Time.deltaTime * 10;
+                    transform.position += direction * Time.deltaTime * 15;
                 }
             }
             
