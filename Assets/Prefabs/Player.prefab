@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 7814569281690047544}
   - component: {fileID: 1065152706476485184}
   m_Layer: 0
-  m_Name: GFX
+  m_Name: RGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ Animator:
   m_GameObject: {fileID: 7526625484189405861}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7761c5b0083621645a0891d51057c34c, type: 2}
+  m_Controller: {fileID: 9100000, guid: b9822b49b755490469954d7dc104e5d7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

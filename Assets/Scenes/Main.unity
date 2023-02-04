@@ -1233,6 +1233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  tanookiAnim: {fileID: 9100000, guid: b9822b49b755490469954d7dc104e5d7, type: 2}
+  raccoonAnim: {fileID: 9100000, guid: 7761c5b0083621645a0891d51057c34c, type: 2}
 --- !u!114 &1733740545
 MonoBehaviour:
   m_ObjectHideFlags: 0
