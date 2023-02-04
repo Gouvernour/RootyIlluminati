@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26b88e0f0139ac946a82982ddc98eaa2
+guid: 5fcbefe690a67b94f9e0d4e1b3e9af39
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,148 +105,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: items_1
+      name: Bugspray_0
       rect:
         serializedVersion: 2
-        x: 1464
-        y: 297
-        width: 132
-        height: 525
+        x: 170
+        y: 164
+        width: 364
+        height: 584
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc402e10069f6294c8f8991b71fdc26a
-      internalID: 904911896
+      spriteID: a6c3afbd6c74e60478c2b55f87b2ab8a
+      internalID: 566395727
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: items_2
+      name: Bugspray_1
       rect:
         serializedVersion: 2
-        x: 233
-        y: 375
-        width: 199
-        height: 270
+        x: 633
+        y: 148
+        width: 358
+        height: 804
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f69a2447f320d2c418dcae15430f9eeb
-      internalID: 1652830909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items_3
-      rect:
-        serializedVersion: 2
-        x: 487
-        y: 309
-        width: 474
-        height: 315
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf2e2c591be98c74abed6f7c61ac9e5d
-      internalID: -456339958
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items_4
-      rect:
-        serializedVersion: 2
-        x: 1081
-        y: 307
-        width: 231
-        height: 383
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c23b30c078a77144785b50bd52e6a429
-      internalID: -424601795
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items_6
-      rect:
-        serializedVersion: 2
-        x: 1746
-        y: 307
-        width: 221
-        height: 198
-      alignment: 9
-      pivot: {x: 0.49672288, y: 0.54446906}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0cc5441dcbed0324f883bef4ecd12129
-      internalID: 1358242985
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items_7
-      rect:
-        serializedVersion: 2
-        x: 2123
-        y: 330
-        width: 219
-        height: 155
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c9a04abb8523e4a41ab4cf7d5d213177
-      internalID: 702292884
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items_0
-      rect:
-        serializedVersion: 2
-        x: 2439
-        y: 106
-        width: 526
-        height: 469
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 864804abaed460d45813baf8d897bc3c
-      internalID: -1413399618
+      spriteID: 28f61ade10e1dff45acdf2d8c11fd530
+      internalID: 1009828014
       vertices: []
       indices: 
       edges: []
@@ -262,17 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      items_2: 1652830909
-      items_10: 975976880
-      items_8: -1315040564
-      items_4: -424601795
-      items_3: -456339958
-      items_1: 904911896
-      items_0: -1413399618
-      items_5: 15679931
-      items_7: 702292884
-      items_6: 1358242985
-      items_9: 910682143
+      Bugspray_0: 566395727
+      Bugspray_1: 1009828014
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

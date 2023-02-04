@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 1985845013438066812}
   - component: {fileID: 5513027199136907521}
   - component: {fileID: 1165440018004927481}
-  m_Layer: 0
+  - component: {fileID: 1394969267446082875}
+  - component: {fileID: 7488977913966758692}
+  m_Layer: 6
   m_Name: Hole
   m_TagString: Holee
   m_Icon: {fileID: 0}
@@ -71,6 +73,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1394969267446082875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400047582755930865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5d31ec20af34349b520cf1cce4be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree_object: {fileID: 4474193535433388292, guid: d80e35f36bf866a41a0c69cccc2bcf69, type: 3}
+--- !u!210 &7488977913966758692
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400047582755930865}
+  m_Enabled: 1
+  m_SortingLayerID: -1282737427
+  m_SortingLayer: -1
+  m_SortingOrder: 0
 --- !u!1 &5544838937518650961
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617930993868628778}
   - component: {fileID: 5736673273309149279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
