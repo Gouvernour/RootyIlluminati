@@ -15,6 +15,12 @@ public class Tool : MonoBehaviour
     bool thrown = false;
     public ToolType tool;
     public int Damage;
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+            StartCoroutine(throwing(Vector3.left));
+    }
     public void Use()
     {
         switch (tool)
@@ -52,9 +58,17 @@ public class Tool : MonoBehaviour
         return this;
     }
 
-    public IEnumerator throwing(Vector2 Direction)
+    public void Throw(Transform parent)
     {
-        Vector3 direction = Vector3.left;
+        if(transform.parent == parent)
+        {
+            StartCoroutine(throwing(Vector3.left));
+        }
+    }
+
+    IEnumerator throwing(Vector2 Direction)
+    {
+        Vector3 direction = (Vector3)Direction;
         thrown = true;
         switch (Direction.x)
         {
@@ -78,13 +92,20 @@ public class Tool : MonoBehaviour
                 }
                 break;
         }
-        if(Physics.Raycast(transform.position, direction, 5))
+        while(thrown)
         {
+            if(Physics.Raycast(transform.position, direction, 5))
+            {
+                thrown = false;
+                Debug.Log("Hit something");
+                //Do damage to hit player
+            }else
+            {
+                Debug.Log("keep mooving");
+                transform.position += direction;
+            }
+            yield return new WaitForSeconds(.03f);
 
-        }else
-        {
-            transform.position += direction;
         }
-        yield return null;
     }
 }
