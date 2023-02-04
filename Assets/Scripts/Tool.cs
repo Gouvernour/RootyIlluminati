@@ -18,10 +18,10 @@ public class Tool : MonoBehaviour
     
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
-    public float rayastDistance;
+    public float rayastDistance = .8f;
     bool thrown = false;
     public ToolType tool;
-    public int Damage;
+    public int Damage = 1;
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
@@ -141,7 +141,7 @@ public class Tool : MonoBehaviour
 
     public void Throw(Transform parent, Vector2 direction)
     {
-        if(transform.parent == parent)
+        if(_parent == parent)
         {
             transform.parent = null;
             StartCoroutine(Throwing(direction));
