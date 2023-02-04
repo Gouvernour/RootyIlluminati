@@ -15,7 +15,7 @@ public class Tool : MonoBehaviour
     
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
-    public float rayastDistance;
+    public float raycastDistance;
     bool thrown = false;
     public ToolType tool;
     public int Damage;
@@ -49,20 +49,34 @@ public class Tool : MonoBehaviour
         {
             case ToolType.Axe:
                 //Melee
-                hits = Physics2D.RaycastAll(origin: transform.position, direction, rayastDistance);
+                hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance);
                 //If hit => Do Damage
-                //if(hit && hit.collider.transform.tag == "Player")
-                //{
-                //    hit.transform.gameObject.GetComponent<Movement>().Killed();
-                //}else if(hit && hit.collider.transform.tag == "Tree")
-                //{
-                //    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
-                //}
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if(hit.collider.gameObject.tag == "Player")
+                    {
+                        hit.transform.gameObject.GetComponent<Movement>().Killed();
+                    }
+                    else if (hit && hit.transform.tag == "Tree")
+                    {
+                        hit.transform.gameObject.GetComponent<Tree>().OnAxe();
+                    }
+                }
                 break;
             case ToolType.WaterGun:
                 //Water
-                //hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
+                hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance * 5);
                 //If hit == Player Do Damage
+                foreach(RaycastHit2D hit in hits)
+                {
+                    if(hit.collider.gameObject.tag == "Player")
+                    {
+
+                    }else if(hit.collider.gameObject.tag == "Tree")
+                    {
+                        hit.transform.gameObject.GetComponent<Tree>().OnWater();
+                    }
+                }
                 //Else if hit == tree => Give Water
                 break;
             case ToolType.BugSpray:
@@ -73,6 +87,10 @@ public class Tool : MonoBehaviour
         }
     }
 
+    public void Throw(Vector2 Direction)
+    {
+        transform.parent = null;
+    }
 
     public void Drop()
     {
@@ -93,7 +111,8 @@ public class Tool : MonoBehaviour
 
     public void Throw(Transform parent, Vector2 direction)
     {
-        if(transform.parent == parent)
+        transform.parent = null;
+        if (transform.parent == parent)
         {
             transform.parent = null;
             StartCoroutine(Throwing(direction));
@@ -128,7 +147,7 @@ public class Tool : MonoBehaviour
         }
         while (thrown)
         {
-            hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
+            hits = Physics2D.RaycastAll(transform.position, direction, raycastDistance);
             foreach (RaycastHit2D h in hits)
             {
                 if (h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
