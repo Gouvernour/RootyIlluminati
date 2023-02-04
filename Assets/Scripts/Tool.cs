@@ -78,14 +78,6 @@ public class Tool : MonoBehaviour
         transform.parent = null;
     }
 
-    {
-        transform.parent = null;
-    }
-
-    {
-        transform.parent = null;
-    }
-
     public void Drop()
     {
         transform.parent = null;
