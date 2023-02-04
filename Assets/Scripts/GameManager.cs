@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     Transform spawnPositionsParent;
 
-    List<GameObject> players = new List<GameObject>();
+    [HideInInspector] public List<GameObject> players = new List<GameObject>();
 
     private void Awake()
     {

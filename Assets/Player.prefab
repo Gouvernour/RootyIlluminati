@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5554057516308328430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 157942267535220422}
@@ -152,11 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acc: 0.5
   decc: 0.35
-  maxVel: 5
+  maxVel: 10
   dashDuration: 0.1
-  dashSpeed: 15
+  dashSpeed: 30
   knockBackDuration: 0.1
-  knockBackSpeed: 20
+  knockBackSpeed: 40
   respawnDuration: 5
   spawnPoint: {fileID: 0}
 --- !u!61 &5642315583656586727
@@ -204,7 +204,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &7526625484189405861
 GameObject:
@@ -279,7 +279,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

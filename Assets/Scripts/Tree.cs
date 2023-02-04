@@ -22,7 +22,6 @@ public class Tree : MonoBehaviour {
 	public Sprite[] wish_sprites;
 	
 	enum WishKind {
-		None,
 		Water,
 		Fertilize,
 		Axe,
@@ -30,7 +29,8 @@ public class Tree : MonoBehaviour {
 	
 	//----------------------
 	
-	WishKind active_wish = WishKind.None;
+	WishKind active_wish = WishKind.Water;
+	int active_wishes_remaining = 0;
 	
 	float grown_percentage = 0f;
 	float next_wish_timer = 3f;
@@ -40,8 +40,13 @@ public class Tree : MonoBehaviour {
 	}
 	
 	void ReceiveTreatment(WishKind kind) {
-		if (kind == active_wish) {
-			next_wish_timer = 3f;
+		if (active_wishes_remaining > 0 && kind == active_wish) {
+			active_wishes_remaining--;
+			
+			if (active_wishes_remaining == 0) {
+				// fulfilled the wish!
+				next_wish_timer = 3f;
+			}
 		}
 	}
 	
@@ -74,7 +79,10 @@ public class Tree : MonoBehaviour {
 	float test_timer = 1f;
 	
 	void FixedUpdate() {
-		wish_sprite_renderer.sprite = wish_sprites[(int)active_wish];
+		wish_sprite_renderer.sprite = null;
+		if (active_wishes_remaining > 0) {
+			wish_sprite_renderer.sprite = wish_sprites[(int)active_wish];
+		}
 		
 		next_wish_timer -= Time.fixedDeltaTime;
 		reset_hp_timer -= Time.fixedDeltaTime;
@@ -83,17 +91,17 @@ public class Tree : MonoBehaviour {
 			hp = 5; //GetMaxHP();
 		}
 		
-		WishCloud.SetActive(active_wish != WishKind.None);
+		WishCloud.SetActive(active_wishes_remaining > 0);
 		
 		axe_shake_amount *= 0.9f;
 		
-		if (Time.time > 2f) {
+		/*if (Time.time > 2f) {
 			test_timer -= Time.fixedDeltaTime;
 			if (test_timer < 0) {
 				OnAxe();
 				test_timer = 0.5f;
 			}
-		}
+		}*/
 		
 		if (hp <= 0) {
 			// dead tree
@@ -104,10 +112,11 @@ public class Tree : MonoBehaviour {
 			return;
 		}
 		
-		if (active_wish == WishKind.None && grown_percentage < 1f) { // should grow?
+		if (active_wishes_remaining == 0 && grown_percentage < 1f) { // should grow?
 			
 			if (next_wish_timer < 0) {
-				//active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
+				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
+				active_wishes_remaining = 3;
 			}
 			
 			int sprite_index = (int)(grown_percentage * sprites.Length);
