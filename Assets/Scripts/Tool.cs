@@ -7,13 +7,13 @@ public enum ToolType
 {
     Axe,
     WaterGun,
-    BugSpray
+    BugSpray,
+    Fertilizer
 }
 public class Tool : MonoBehaviour
 {
     CapsuleCollider2D col;
-    
-    Vector3 throwVector = Vector3.left;
+    Vector3 rotationSpeed = new Vector3(0, 0, 3);
     public Transform _parent;
     public float raycastDistance;
     bool thrown = false;
@@ -27,8 +27,8 @@ public class Tool : MonoBehaviour
         if(col == null)
         {
             col = gameObject.AddComponent<CapsuleCollider2D>();
-            col.isTrigger = true;
         }
+        col.isTrigger = true;
     }
 
     public void Update()
@@ -49,7 +49,7 @@ public class Tool : MonoBehaviour
         {
             case ToolType.Axe:
                 //Melee
-                hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance);
+                hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance * 3);
                 //If hit => Do Damage
                 foreach (RaycastHit2D hit in hits)
                 {
@@ -162,7 +162,7 @@ public class Tool : MonoBehaviour
                 }
                 else
                 {
-                    transform.Rotate(new Vector3(0, 0, 3));
+                    transform.Rotate(rotationSpeed);
                     transform.position += direction * Time.deltaTime * 10;
                 }
             }
