@@ -153,7 +153,7 @@ public class Tool : MonoBehaviour
                     }
                     else if (colliders[i].gameObject.tag == "Playyer")
                     {
-                        colliders[i].gameObject.GetComponent<Movement>().Killed();
+                        //colliders[i].gameObject.GetComponent<Movement>().Killed();
                     }
                 }
                 break;
