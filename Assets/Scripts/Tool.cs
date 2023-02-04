@@ -97,7 +97,18 @@ public class Tool : MonoBehaviour
                 break;
             case ToolType.WaterGun:
                 //Water
-                //hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
+                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance * 5);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if(hit.collider.gameObject.tag == "Tree")
+                    {
+                        hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                    }
+                    if(hit.collider.gameObject.tag == "Player")
+                    {
+                        hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
+                    }
+                }
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
