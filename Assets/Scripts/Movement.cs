@@ -59,7 +59,9 @@ public class Movement : MonoBehaviour
     {
         dashTriggered = _ctx.action.triggered;
     }
-
+	
+	public Vector2 GetLastDir() { return lastDir; }
+	
     public void OnUse(InputAction.CallbackContext _ctx)
     {
         if (!currentTool)
