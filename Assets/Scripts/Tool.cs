@@ -12,8 +12,7 @@ public enum ToolType
 public class Tool : MonoBehaviour
 {
     CapsuleCollider2D col;
-    ContactFilter2D contactFilter = new ContactFilter2D();
-    Collider2D[] colliders;
+    
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
     public float rayastDistance;
@@ -32,8 +31,6 @@ public class Tool : MonoBehaviour
             col = gameObject.AddComponent<CapsuleCollider2D>();
             col.isTrigger = true;
         }
-        colliders = new Collider2D[10];
-        contactFilter = new ContactFilter2D();
     }
 
     public void Update()
@@ -53,12 +50,11 @@ public class Tool : MonoBehaviour
         switch (tool)
         {
             case ToolType.Axe:
-                //Melee
+ 				Collider2D[] colliders = new Collider2D[10];
+				ContactFilter2D contactFilter = new ContactFilter2D();
 				int colliderCount = eero_collider.OverlapCollider(contactFilter, colliders);
-				for (int i=0; i<colliderCount; i++) 
-                {
-					if (colliders[i].gameObject.tag == "Tree") 
-                    {
+				for (int i=0; i<colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Tree") {
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
 					}
 				}
