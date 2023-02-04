@@ -131,7 +131,7 @@ public class Tool : MonoBehaviour
             hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
-                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
+                if (h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
                 {
                     thrown = false;
                     //Do damage to hit player
