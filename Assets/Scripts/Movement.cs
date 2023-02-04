@@ -45,6 +45,7 @@ public class Movement : MonoBehaviour
     public float respawnDuration;
     [HideInInspector] public Transform spawnPoint;
 
+    public Animator anim;
 
     public void OnMove(InputAction.CallbackContext _ctx)
     {
@@ -52,6 +53,14 @@ public class Movement : MonoBehaviour
         {
             currentState = MovementState.moving;
             moveDir = _ctx.ReadValue<Vector2>().normalized;
+
+            if (moveDir.y < 0 && Mathf.Abs(moveDir.y) >= Mathf.Abs(moveDir.x)) anim.Play("RunFront1");
+            else if (moveDir.y > 0 && Mathf.Abs(moveDir.y) >= Mathf.Abs(moveDir.x)) anim.Play("RunBack");
+            else if (moveDir.x > 0) anim.Play("RunRight");
+            else if (moveDir.x < 0) anim.Play("RunLeft");
+
+            if (moveDir == Vector2.zero) anim.Play("Idle");
+
         }
     }
 
@@ -77,6 +86,8 @@ public class Movement : MonoBehaviour
 
         currentTool.Throw(transform, lastDir);
         currentTool = null;
+
+        
     }
 
 
@@ -139,6 +150,7 @@ public class Movement : MonoBehaviour
                     speed += acc;
                 }
                 lastDir = moveDir;
+
             }
             else if (moveDir == Vector2.zero)
             {
@@ -198,6 +210,7 @@ public class Movement : MonoBehaviour
         dead = true;
         respawnTimer = respawnDuration;
         rBod.velocity = Vector2.zero;
+        anim.Play("Dead");
     }
 
     public void KnockBack(Vector3 colPos)
@@ -212,6 +225,7 @@ public class Movement : MonoBehaviour
     {
         transform.position = spawnPoint.position;
         currentState = MovementState.still;
+        anim.Play("Idle");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -224,7 +238,8 @@ public class Movement : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Tool")
         {
-            currentTool = collision.GetComponent<Tool>().PickUp(this.transform);
+            if (currentTool == null)
+                currentTool = collision.GetComponent<Tool>().PickUp(this.transform);
         }
     }
 
