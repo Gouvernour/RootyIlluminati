@@ -11,11 +11,10 @@ public enum ToolType
 }
 public class Tool : MonoBehaviour
 {
+    CapsuleCollider2D col;
+    
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
-
-    public Collider2D collider;
-    public SpriteRenderer renderer;
     float rayastDistance = .8f;
     bool thrown = false;
     public ToolType tool;
@@ -23,24 +22,41 @@ public class Tool : MonoBehaviour
     RaycastHit2D hit;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 
-    public void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-            StartCoroutine(throwing(throwVector));
-        if (Input.GetKeyDown(KeyCode.P))
+        if(col == null)
         {
-            PickUp(transform);
-            _parent = hit.transform;
-            throwVector *= -1;
+            col = gameObject.AddComponent<CapsuleCollider2D>();
+            col.isTrigger = true;
         }
     }
-    public void Use()
+
+    public void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.T))
+        //    StartCoroutine(Throwing(throwVector));
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    PickUp(transform);
+        //    _parent = hit.transform;
+        //    throwVector *= -1;
+        //}
+    }
+    public void Use(Vector2 direction)
     {
         switch (tool)
         {
             case ToolType.Axe:
                 //Melee
+                hit = Physics2D.Raycast(origin: transform.position, direction: transform.forward, rayastDistance);
                 //If hit => Do Damage
+                if(hit && hit.collider.transform.tag == "Player")
+                {
+
+                }else if(hit && hit.collider.transform.tag == "Tree")
+                {
+
+                }
                 break;
             case ToolType.WaterGun:
                 //Water
@@ -78,11 +94,11 @@ public class Tool : MonoBehaviour
     {
         if(transform.parent == parent)
         {
-            StartCoroutine(throwing(Vector3.left));
+            StartCoroutine(Throwing(Vector3.left));
         }
     }
 
-    IEnumerator throwing(Vector2 Direction)
+    IEnumerator Throwing(Vector2 Direction)
     {
         Vector3 direction = (Vector3)Direction;
         thrown = true;
