@@ -99,6 +99,8 @@ public class Tool : MonoBehaviour
                     }
 				}
 				
+                _parent.GetChild(0).GetComponent<Animator>().Play("Chop");
+
                 break;
             case ToolType.WaterGun:
                 //Water
@@ -167,6 +169,9 @@ public class Tool : MonoBehaviour
         transform.SetPositionAndRotation(transform.position, StandardRotation);
         //transform.SetParent(player);
         _parent = player;
+
+        _parent.GetChild(0).GetComponent<Animator>().Play("Pick");
+
         return this;
     }
 
@@ -175,6 +180,8 @@ public class Tool : MonoBehaviour
         if(_parent == parent)
         {
             StartCoroutine(Throwing(direction));
+
+            _parent.GetChild(0).GetComponent<Animator>().Play("Throw");
         }
     }
 

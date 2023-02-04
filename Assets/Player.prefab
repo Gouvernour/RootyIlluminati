@@ -159,6 +159,7 @@ MonoBehaviour:
   knockBackSpeed: 40
   respawnDuration: 5
   spawnPoint: {fileID: 0}
+  anim: {fileID: 1065152706476485184}
 --- !u!61 &5642315583656586727
 BoxCollider2D:
   m_ObjectHideFlags: 0
