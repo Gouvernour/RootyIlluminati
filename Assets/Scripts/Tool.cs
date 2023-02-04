@@ -53,7 +53,7 @@ public class Tool : MonoBehaviour
                 //If hit => Do Damage
                 foreach (RaycastHit2D hit in hits)
                 {
-                    if(hit.transform.tag == "Player")
+                    if(hit.collider.gameObject.tag == "Player")
                     {
                         hit.transform.gameObject.GetComponent<Movement>().Killed();
                     }
@@ -69,10 +69,10 @@ public class Tool : MonoBehaviour
                 //If hit == Player Do Damage
                 foreach(RaycastHit2D hit in hits)
                 {
-                    if(hit.transform.tag == "Player")
+                    if(hit.collider.gameObject.tag == "Player")
                     {
 
-                    }else if(hit && hit.transform.tag == "Tree")
+                    }else if(hit.collider.gameObject.tag == "Tree")
                     {
                         hit.transform.gameObject.GetComponent<Tree>().OnWater();
                     }
