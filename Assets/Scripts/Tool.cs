@@ -53,10 +53,10 @@ public class Tool : MonoBehaviour
                 //If hit => Do Damage
                 if(hit && hit.collider.transform.tag == "Player")
                 {
-
+                    hit.transform.gameObject.GetComponent<Movement>().Killed();
                 }else if(hit && hit.collider.transform.tag == "Tree")
                 {
-
+                    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
                 }
                 break;
             case ToolType.WaterGun:
@@ -91,11 +91,11 @@ public class Tool : MonoBehaviour
         return this;
     }
 
-    public void Throw(Transform parent)
+    public void Throw(Transform parent, Vector2 direction)
     {
         if(transform.parent == parent)
         {
-            StartCoroutine(Throwing(Vector3.left));
+            StartCoroutine(Throwing(direction));
         }
     }
 
@@ -132,11 +132,9 @@ public class Tool : MonoBehaviour
             {
 
                 thrown = false;
-                Debug.Log("Hit something");
                 //Do damage to hit player
             }else
             {
-                Debug.Log("keep mooving");
                 transform.Rotate(new Vector3(0,0,3));
                 transform.position += direction * Time.deltaTime * 10;
             }
