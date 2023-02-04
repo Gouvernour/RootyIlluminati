@@ -55,7 +55,7 @@ public class Tool : MonoBehaviour
                     hit.transform.gameObject.GetComponent<Movement>().Killed();
                 }else if(hit && hit.collider.transform.tag == "Tree")
                 {
-
+                    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
                 }
                 break;
             case ToolType.WaterGun:
