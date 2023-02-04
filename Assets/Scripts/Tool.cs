@@ -22,6 +22,9 @@ public class Tool : MonoBehaviour
     public int Damage;
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
+    int numColliders = 10;
+    Collider2D[] colliders;
+    ContactFilter2D contactFilter = new ContactFilter2D();
 
     private void Start()
     {
@@ -50,18 +53,18 @@ public class Tool : MonoBehaviour
         {
             case ToolType.Axe:
                 //Melee
-
+                Physics2D.OverlapCollider(col, contactFilter, colliders);
                 hits = Physics2D.RaycastAll(origin: transform.position, direction, raycastDistance * 3);
                 //If hit => Do Damage
-                foreach (RaycastHit2D hit in hits)
+                foreach (Collider2D c in colliders)
                 {
-                    if(hit.collider.gameObject.tag == "Player")
+                    if(c.gameObject.tag == "Player")
                     {
-                        hit.transform.gameObject.GetComponent<Movement>().Killed();
+                        c.transform.gameObject.GetComponent<Movement>().Killed();
                     }
-                    else if (hit && hit.transform.tag == "Tree")
+                    else if (c && c.gameObject.tag == "Tree")
                     {
-                        hit.transform.gameObject.GetComponent<Tree>().OnAxe();
+                        c.transform.gameObject.GetComponent<Tree>().OnAxe();
                     }
                 }
                 break;
