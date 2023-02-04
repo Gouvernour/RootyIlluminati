@@ -37,10 +37,14 @@ public class GameManager : MonoBehaviour
         players.Add(input.gameObject);
         DontDestroyOnLoad(input.gameObject);
 
-
-        input.GetComponent<Movement>().enabled = false;
         input.transform.position = spawnPositionsParent.GetChild(players.Count - 1).position;
         input.GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(players.Count - 1);
+
+        if (SceneManager.GetActiveScene().name == "PlayerSpawningTest")
+        {
+            input.GetComponent<Movement>().enabled = false;
+
+        }
     }
 
     public void StartGame(string name)
