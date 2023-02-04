@@ -62,6 +62,7 @@ public class Tree : MonoBehaviour {
 	//}
 	
 	public void OnAxe() {
+		print("OnAxe");
 		axe_shake_amount = 1;
 		reset_hp_timer = 1;
 		hp--;

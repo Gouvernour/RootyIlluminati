@@ -22,6 +22,8 @@ public class Tool : MonoBehaviour
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 
+	public Collider2D eero_collider;
+
     private void Start()
     {
         if(col == null)
@@ -48,6 +50,7 @@ public class Tool : MonoBehaviour
         switch (tool)
         {
             case ToolType.Axe:
+<<<<<<< Updated upstream
                 //Melee
                 hits = Physics2D.RaycastAll(origin: transform.position, direction, rayastDistance);
                 //If hit => Do Damage
@@ -58,6 +61,17 @@ public class Tool : MonoBehaviour
                 //{
                 //    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
                 //}
+=======
+				// @eero
+ 				Collider2D[] colliders = new Collider2D[10];
+				ContactFilter2D contactFilter = new ContactFilter2D();
+				int colliderCount = eero_collider.OverlapCollider(contactFilter, colliders);
+				for (int i=0; i<colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Tree") {
+						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
+					}
+				}
+>>>>>>> Stashed changes
                 break;
             case ToolType.WaterGun:
                 //Water
