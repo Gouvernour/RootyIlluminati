@@ -149,7 +149,7 @@ public class Tool : MonoBehaviour
                 {
                     if (colliders[i].gameObject.tag == "Tree")
                     {
-                        colliders[i].gameObject.GetComponent<Tree>().OnBugSpray();
+                        colliders[i].gameObject.GetComponent<Tree>().OnSpray();
                     }
                     else if (colliders[i].gameObject.tag == "Playyer")
                     {
