@@ -44,6 +44,7 @@ public class Tool : MonoBehaviour
     }
     public void Use(Vector2 direction)
     {
+        print("Use");
         switch (tool)
         {
             case ToolType.Axe:
@@ -127,8 +128,9 @@ public class Tool : MonoBehaviour
         while(thrown)
         {
             hit  = Physics2D.Raycast(origin: transform.position, direction: transform.forward, rayastDistance);
-            if (hit && hit.collider.gameObject.transform != _parent)
+            if (hit && hit.collider.gameObject.transform != _parent && hit.collider.gameObject != gameObject)
             {
+
                 thrown = false;
                 Debug.Log("Hit something");
                 //Do damage to hit player

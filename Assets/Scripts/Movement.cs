@@ -40,6 +40,8 @@ public class Movement : MonoBehaviour
     public float respawnDuration;
     [HideInInspector] public Transform spawnPoint;
 
+    Tool currentTool;
+
     public void OnMove(InputAction.CallbackContext _ctx)
     {
         if (currentState == MovementState.still || currentState == MovementState.moving)
@@ -53,6 +55,17 @@ public class Movement : MonoBehaviour
     {
         dashTriggered = _ctx.action.triggered;
     }
+
+    public void OnUse(InputAction.CallbackContext _ctx)
+    {
+        currentTool.Use(lastDir);
+    }
+
+    public void OnThrow(InputAction.CallbackContext _ctx)
+    {
+        currentTool.Throw(transform);
+    }
+
 
     void Start()
     {
@@ -193,6 +206,10 @@ public class Movement : MonoBehaviour
             GetComponent<BoxCollider2D>().isTrigger = false;
             rBod.velocity = Vector2.zero;
             currentState = MovementState.still;
+        }
+        else if (collision.gameObject.tag == "Tool")
+        {
+            currentTool = collision.GetComponent<Tool>().PickUp(this.transform);
         }
     }
 
