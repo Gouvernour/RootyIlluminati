@@ -95,13 +95,13 @@ public class Tree : MonoBehaviour {
 		
 		axe_shake_amount *= 0.9f;
 		
-		if (Time.time > 2f) {
+		/*if (Time.time > 2f) {
 			test_timer -= Time.fixedDeltaTime;
 			if (test_timer < 0) {
 				OnAxe();
 				test_timer = 0.5f;
 			}
-		}
+		}*/
 		
 		if (hp <= 0) {
 			// dead tree
