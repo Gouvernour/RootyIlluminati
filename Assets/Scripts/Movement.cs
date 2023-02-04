@@ -69,7 +69,7 @@ public class Movement : MonoBehaviour
         if (!currentTool)
             return;
 
-        currentTool.Throw(lastDir);
+        currentTool.Throw(transform, lastDir);
     }
 
 

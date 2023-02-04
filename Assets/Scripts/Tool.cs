@@ -15,7 +15,7 @@ public class Tool : MonoBehaviour
     
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
-    float rayastDistance = .8f;
+    public float rayastDistance;
     bool thrown = false;
     public ToolType tool;
     public int Damage;

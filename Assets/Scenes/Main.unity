@@ -595,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parent: {fileID: 0}
+  rayastDistance: 10
   tool: 0
   Damage: 1
   StandardRotation: {x: 0, y: 0, z: 0, w: 1}
