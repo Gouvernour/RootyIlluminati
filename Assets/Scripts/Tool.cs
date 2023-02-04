@@ -11,23 +11,52 @@ public enum ToolType
 }
 public class Tool : MonoBehaviour
 {
-    public Collider2D collider;
+    CapsuleCollider2D col;
+    
+    Vector3 throwVector = Vector3.left;
+    public Transform _parent;
+    float rayastDistance = .8f;
     bool thrown = false;
     public ToolType tool;
     public int Damage;
+    RaycastHit2D hit;
+    [SerializeField] Quaternion StandardRotation = Quaternion.identity;
+
+    private void Start()
+    {
+        if(col == null)
+        {
+            col = gameObject.AddComponent<CapsuleCollider2D>();
+            col.isTrigger = true;
+        }
+    }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-            StartCoroutine(throwing(Vector3.left));
+        //if (Input.GetKeyDown(KeyCode.T))
+        //    StartCoroutine(Throwing(throwVector));
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    PickUp(transform);
+        //    _parent = hit.transform;
+        //    throwVector *= -1;
+        //}
     }
-    public void Use()
+    public void Use(Vector2 direction)
     {
         switch (tool)
         {
             case ToolType.Axe:
                 //Melee
+                hit = Physics2D.Raycast(origin: transform.position, direction: transform.forward, rayastDistance);
                 //If hit => Do Damage
+                if(hit && hit.collider.transform.tag == "Player")
+                {
+
+                }else if(hit && hit.collider.transform.tag == "Tree")
+                {
+
+                }
                 break;
             case ToolType.WaterGun:
                 //Water
@@ -55,6 +84,9 @@ public class Tool : MonoBehaviour
 
     public Tool PickUp(Transform player)
     {
+        transform.SetPositionAndRotation(transform.position, StandardRotation);
+        transform.SetParent(player);
+        _parent = player;
         return this;
     }
 
@@ -62,11 +94,11 @@ public class Tool : MonoBehaviour
     {
         if(transform.parent == parent)
         {
-            StartCoroutine(throwing(Vector3.left));
+            StartCoroutine(Throwing(Vector3.left));
         }
     }
 
-    IEnumerator throwing(Vector2 Direction)
+    IEnumerator Throwing(Vector2 Direction)
     {
         Vector3 direction = (Vector3)Direction;
         thrown = true;
@@ -94,7 +126,8 @@ public class Tool : MonoBehaviour
         }
         while(thrown)
         {
-            if(Physics.Raycast(transform.position, direction, 5))
+            hit  = Physics2D.Raycast(origin: transform.position, direction: transform.forward, rayastDistance);
+            if (hit && hit.collider.gameObject.transform != _parent)
             {
                 thrown = false;
                 Debug.Log("Hit something");
@@ -102,9 +135,10 @@ public class Tool : MonoBehaviour
             }else
             {
                 Debug.Log("keep mooving");
-                transform.position += direction;
+                transform.Rotate(new Vector3(0,0,3));
+                transform.position += direction * Time.deltaTime * 10;
             }
-            yield return new WaitForSeconds(.03f);
+            yield return null;
 
         }
     }
