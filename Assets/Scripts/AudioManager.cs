@@ -73,7 +73,6 @@ public class AudioManager : MonoBehaviour
             if (s.name == name)
             {
                 s.sauce.Play();
-                print(name);
                 return;
             }
         }

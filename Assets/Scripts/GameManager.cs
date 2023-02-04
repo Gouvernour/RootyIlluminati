@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,26 +29,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Main")
-        {
-            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
-
-        }
+        spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
     }
 
     public void OnPlayerJoined(PlayerInput input)
     {
         players.Add(input.gameObject);
         DontDestroyOnLoad(input.gameObject);
-        
-        
-        if (SceneManager.GetActiveScene().name == "Main")
-        {
-            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
 
-            input.transform.position = spawnPositionsParent.GetChild(players.Count-1).position;
-            input.GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(players.Count - 1);
-        }
+
+        input.GetComponent<Movement>().enabled = false;
+        input.transform.position = spawnPositionsParent.GetChild(players.Count - 1).position;
+        input.GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(players.Count - 1);
     }
 
     public void StartGame(string name)
@@ -68,6 +61,8 @@ public class GameManager : MonoBehaviour
         {
             players[i].transform.position = spawnPositionsParent.GetChild(i).position;
             players[i].GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(i);
+
+            players[i].GetComponent<Movement>().enabled = true;
         }
     }
 
