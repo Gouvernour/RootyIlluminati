@@ -49,7 +49,7 @@ public class Tool : MonoBehaviour
         {
             case ToolType.Axe:
                 //Melee
-                hit = Physics2D.Raycast(origin: transform.position, direction: transform.forward, rayastDistance);
+                hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance);
                 //If hit => Do Damage
                 if(hit && hit.collider.transform.tag == "Player")
                 {
@@ -61,6 +61,7 @@ public class Tool : MonoBehaviour
                 break;
             case ToolType.WaterGun:
                 //Water
+                hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
@@ -127,7 +128,7 @@ public class Tool : MonoBehaviour
         }
         while(thrown)
         {
-            hit  = Physics2D.Raycast(origin: transform.position, direction: transform.forward, rayastDistance);
+            hit  = Physics2D.Raycast(origin: transform.position, direction, rayastDistance);
             if (hit && hit.collider.gameObject.transform != _parent && hit.collider.gameObject != gameObject)
             {
 
