@@ -26,15 +26,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
+
+        }
+    }
+
     public void OnPlayerJoined(PlayerInput input)
     {
         players.Add(input.gameObject);
         DontDestroyOnLoad(input.gameObject);
+        
+        
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
+
+            input.transform.position = spawnPositionsParent.GetChild(players.Count-1).position;
+            input.GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(players.Count - 1);
+        }
     }
 
-    public void StartGame()
+    public void StartGame(string name)
     {
-        SceneManager.LoadScene("RasmusCorneer");
+        SceneManager.LoadScene(name);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -42,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        //GetComponent<PlayerInputManager>().enabled = false;
 
         spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
 
