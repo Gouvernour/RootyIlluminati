@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2881396472502171519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.41, y: 1.53, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.7735849, g: 0.15617657, b: 0.15617657, a: 1}
+  m_Sprite: {fileID: -424601795, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,11 +100,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parent: {fileID: 0}
-  raycastDistance: 0
+  rayastDistance: 0
   tool: 0
   Damage: 1
   StandardRotation: {x: 0, y: 0, z: 0, w: 1}
   eero_collider: {fileID: 2189078477984163945}
+  eero_sprite_renderer: {fileID: 0}
+  eero_sprite_per_tool_type:
+  - {fileID: -424601795, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: -456339958, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: 702292884, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: 904911896, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: 1652830909, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
 --- !u!58 &2189078477984163945
 CircleCollider2D:
   m_ObjectHideFlags: 0
