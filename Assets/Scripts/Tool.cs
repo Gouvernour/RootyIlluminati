@@ -119,15 +119,18 @@ public class Tool : MonoBehaviour
                 break;
 				
 			case ToolType.Shovel:
-				eero_tool_shake_amount = 1;
+				eero_tool_shake_amount = -1;
+				
+				const float complete_hole_size = 0.7f;
 				
 				bool found_hole = false;
 				for (int i=0; i<colliderCount; i++) {
-					print("colliders[i].gameObject.tag " + colliders[i].gameObject.tag);
+					//print("colliders[i].gameObject.tag " + colliders[i].gameObject.tag);
 					if (colliders[i].gameObject.tag == "Holee") {
 						GameObject hole_sprite = colliders[i].gameObject.transform.GetChild(0).gameObject;
 						float s = hole_sprite.transform.localScale.x;
-						if (s < 1) {
+						
+						if (s < complete_hole_size) {
 							float new_s = s + 0.1f;
 							hole_sprite.transform.localScale = new Vector3(new_s, new_s, new_s);
 						}
@@ -135,8 +138,7 @@ public class Tool : MonoBehaviour
 					}
 				}
 				if (!found_hole) {
-					GameObject h = Instantiate(hole, transform.position, Quaternion.identity);
-					//h.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+					Instantiate(hole, transform.position, Quaternion.identity);
 				}
 				
 				break;
