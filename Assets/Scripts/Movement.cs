@@ -58,12 +58,18 @@ public class Movement : MonoBehaviour
 
     public void OnUse(InputAction.CallbackContext _ctx)
     {
+        if (!currentTool)
+            return;
+
         currentTool.Use(lastDir);
     }
 
     public void OnThrow(InputAction.CallbackContext _ctx)
     {
-        currentTool.Throw(transform);
+        if (!currentTool)
+            return;
+
+        currentTool.Throw(lastDir);
     }
 
 
@@ -169,14 +175,14 @@ public class Movement : MonoBehaviour
     }
 
 
-    void Killed()
+    public void Killed()
     {
         dead = true;
         respawnTimer = respawnDuration;
         rBod.velocity = Vector2.zero;
     }
 
-    void KnockBack(Vector3 colPos)
+    public void KnockBack(Vector3 colPos)
     {
         currentState = MovementState.knockBacked;
 
