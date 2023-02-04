@@ -83,7 +83,7 @@ public class Tool : MonoBehaviour
 		ContactFilter2D contactFilter = new ContactFilter2D();
 		int colliderCount = eero_collider.OverlapCollider(contactFilter.NoFilter(), colliders);
         
-		print("Use " + colliderCount);
+		print("Use ");
 		
         switch (tool)
         {
@@ -123,19 +123,10 @@ public class Tool : MonoBehaviour
 			case ToolType.Shovel:
 				eero_tool_shake_amount = -1;
 				
-				const float complete_hole_size = 0.7f;
-				
 				bool found_hole = false;
 				for (int i=0; i<colliderCount; i++) {
-					//print("colliders[i].gameObject.tag " + colliders[i].gameObject.tag);
 					if (colliders[i].gameObject.tag == "Holee") {
-						GameObject hole_sprite = colliders[i].gameObject.transform.GetChild(0).gameObject;
-						float s = hole_sprite.transform.localScale.x;
-						
-						if (s < complete_hole_size) {
-							float new_s = s + 0.1f;
-							hole_sprite.transform.localScale = new Vector3(new_s, new_s, new_s);
-						}
+						colliders[i].gameObject.GetComponent<HoleScript>().Grow();
 						found_hole = true;
 					}
 				}
@@ -144,6 +135,20 @@ public class Tool : MonoBehaviour
 				}
 				
 				break;
+				
+			case ToolType.SeedBag:
+				eero_tool_shake_amount = -1;
+				
+				for (int i=0; i<colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Holee") {
+						colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant();
+					}
+				}
+				
+				break;
+            //case ToolType.BugSpray:
+            //    //Pesticide
+            //    break;
             case ToolType.BugSpray:
                 for (int i = 0; i < colliderCount; i++)
                 {
