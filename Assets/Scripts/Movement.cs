@@ -34,6 +34,10 @@ public class Movement : MonoBehaviour
     public float knockBackDuration;
     public float knockBackSpeed;
 
+    //hp and spawn
+    bool dead;
+    float respawnTimer;
+    public float respawnDuration;
     [HideInInspector] public Transform spawnPoint;
 
     public void OnMove(InputAction.CallbackContext _ctx)
@@ -62,9 +66,7 @@ public class Movement : MonoBehaviour
         {
             if ((currentState == MovementState.still || currentState == MovementState.moving))
             {
-                currentState = MovementState.dashing;
-                dashTimer = dashDuration;
-                dashPressed = true;
+                StartDash();
             }
         }
         else if (!dashTriggered && dashPressed)
@@ -72,11 +74,24 @@ public class Movement : MonoBehaviour
             dashPressed = false;
         }
 
+        if (dead)
+        {
+            respawnTimer -= Time.deltaTime;
+            if (respawnTimer <= 0)
+            {
+                Respawn();
+                dead = false;
+            }
+        }
 
     }
 
     private void FixedUpdate()
     {
+        if (dead)
+        {
+            return;
+        }
 
         if (currentState == MovementState.moving)
         {
@@ -101,6 +116,8 @@ public class Movement : MonoBehaviour
             if (dashTimer <= 0)
             {
                 speed = maxVel;
+                GetComponent<BoxCollider2D>().isTrigger = false;
+
                 if (moveDir != Vector2.zero)
                 {
                     currentState = MovementState.moving;
@@ -130,6 +147,21 @@ public class Movement : MonoBehaviour
 
     }
 
+    void StartDash()
+    {
+        currentState = MovementState.dashing;
+        dashTimer = dashDuration;
+        dashPressed = true;
+        GetComponent<BoxCollider2D>().isTrigger = true;
+    }
+
+
+    void Killed()
+    {
+        dead = true;
+        respawnTimer = respawnDuration;
+        rBod.velocity = Vector2.zero;
+    }
 
     void KnockBack(Vector3 colPos)
     {
@@ -142,14 +174,25 @@ public class Movement : MonoBehaviour
     void Respawn()
     {
         transform.position = spawnPoint.position;
-        rBod.velocity = Vector2.zero;
+        currentState = MovementState.still;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            Killed();
             KnockBack(collision.transform.position);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            rBod.velocity = Vector2.zero;
+            currentState = MovementState.still;
         }
     }
 
