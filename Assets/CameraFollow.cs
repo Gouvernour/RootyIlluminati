@@ -9,12 +9,10 @@ public class CameraFollow : MonoBehaviour
 
     public float minSize;
     public float maxSize;
+    public float borderX;
+    public float borderY;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()
@@ -34,6 +32,9 @@ public class CameraFollow : MonoBehaviour
         Vector3 desiredPosition = bounds.center;
         Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
+        smoothPosition.x = Mathf.Min(Mathf.Max(smoothPosition.x, -borderX), borderX);
+        smoothPosition.y = Mathf.Min(Mathf.Max(smoothPosition.y, -borderY), borderY);
+        smoothPosition.z = -10;
         transform.position = smoothPosition;
 
         float mag = Mathf.Sqrt(bounds.size.x * bounds.size.x + bounds.size.y * bounds.size.y);

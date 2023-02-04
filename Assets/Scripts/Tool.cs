@@ -50,19 +50,6 @@ public class Tool : MonoBehaviour
         switch (tool)
         {
             case ToolType.Axe:
-<<<<<<< Updated upstream
-                //Melee
-                hits = Physics2D.RaycastAll(origin: transform.position, direction, rayastDistance);
-                //If hit => Do Damage
-                //if(hit && hit.collider.transform.tag == "Player")
-                //{
-                //    hit.transform.gameObject.GetComponent<Movement>().Killed();
-                //}else if(hit && hit.collider.transform.tag == "Tree")
-                //{
-                //    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
-                //}
-=======
-				// @eero
  				Collider2D[] colliders = new Collider2D[10];
 				ContactFilter2D contactFilter = new ContactFilter2D();
 				int colliderCount = eero_collider.OverlapCollider(contactFilter, colliders);
@@ -71,7 +58,6 @@ public class Tool : MonoBehaviour
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
 					}
 				}
->>>>>>> Stashed changes
                 break;
             case ToolType.WaterGun:
                 //Water
