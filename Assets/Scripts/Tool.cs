@@ -25,11 +25,14 @@ public class Tool : MonoBehaviour
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
+	
 	public Collider2D eero_collider;
 	public Sprite[] eero_sprite_per_tool_type;
 	Vector3 eero_parent_prev_frame_position;
 	float eero_localScale_start;
 	float eero_tool_shake_amount = 0;
+	
+	public GameObject hole;
 	
     private void Start()
     {
@@ -76,14 +79,17 @@ public class Tool : MonoBehaviour
 	
     public void Use(Vector2 direction)
     {
-        print("Use");
+		Collider2D[] colliders = new Collider2D[10];
+		ContactFilter2D contactFilter = new ContactFilter2D();
+		int colliderCount = eero_collider.OverlapCollider(contactFilter.NoFilter(), colliders);
+        
+		print("Use " + colliderCount);
+		
         switch (tool)
         {
             case ToolType.Axe:
-				// @eero
- 				Collider2D[] colliders = new Collider2D[10];
-				ContactFilter2D contactFilter = new ContactFilter2D();
-				int colliderCount = eero_collider.OverlapCollider(contactFilter, colliders);
+				eero_tool_shake_amount = 1;
+				
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Tree") {
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
@@ -93,8 +99,6 @@ public class Tool : MonoBehaviour
                     }
 				}
 				
-				eero_tool_shake_amount = 1;
-
                 _parent.GetChild(0).GetComponent<Animator>().Play("Chop");
 
                 break;
@@ -115,6 +119,31 @@ public class Tool : MonoBehaviour
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
+				
+			case ToolType.Shovel:
+				eero_tool_shake_amount = -1;
+				
+				const float complete_hole_size = 0.7f;
+				
+				bool found_hole = false;
+				for (int i=0; i<colliderCount; i++) {
+					//print("colliders[i].gameObject.tag " + colliders[i].gameObject.tag);
+					if (colliders[i].gameObject.tag == "Holee") {
+						GameObject hole_sprite = colliders[i].gameObject.transform.GetChild(0).gameObject;
+						float s = hole_sprite.transform.localScale.x;
+						
+						if (s < complete_hole_size) {
+							float new_s = s + 0.1f;
+							hole_sprite.transform.localScale = new Vector3(new_s, new_s, new_s);
+						}
+						found_hole = true;
+					}
+				}
+				if (!found_hole) {
+					Instantiate(hole, transform.position, Quaternion.identity);
+				}
+				
+				break;
             //case ToolType.BugSpray:
             //    //Pesticide
             //    break;
