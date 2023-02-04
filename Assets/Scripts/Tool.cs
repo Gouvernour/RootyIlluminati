@@ -10,6 +10,7 @@ public enum ToolType
     Fertilizer,
     Shovel,
     SeedBag,
+    BugSpray
 }
 public class Tool : MonoBehaviour
 {
