@@ -73,6 +73,18 @@ public class Tool : MonoBehaviour
         }
     }
 
+    public void Throw(Vector2 Direction)
+    {
+        transform.parent = null;
+    }
+
+    {
+        transform.parent = null;
+    }
+
+    {
+        transform.parent = null;
+    }
 
     public void Drop()
     {
@@ -93,7 +105,8 @@ public class Tool : MonoBehaviour
 
     public void Throw(Transform parent, Vector2 direction)
     {
-        if(transform.parent == parent)
+        transform.parent = null;
+        if (transform.parent == parent)
         {
             transform.parent = null;
             StartCoroutine(Throwing(direction));
