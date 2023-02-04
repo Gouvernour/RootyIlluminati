@@ -62,6 +62,7 @@ public class Movement : MonoBehaviour
             return;
 
         currentTool.Use(lastDir);
+        currentTool = null;
     }
 
     public void OnThrow(InputAction.CallbackContext _ctx)
@@ -69,7 +70,8 @@ public class Movement : MonoBehaviour
         if (!currentTool)
             return;
 
-        currentTool.Throw(lastDir);
+        currentTool.Throw(transform, lastDir);
+        currentTool = null;
     }
 
 

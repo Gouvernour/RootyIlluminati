@@ -15,11 +15,11 @@ public class Tool : MonoBehaviour
     
     Vector3 throwVector = Vector3.left;
     public Transform _parent;
-    float rayastDistance = .8f;
+    public float rayastDistance;
     bool thrown = false;
     public ToolType tool;
     public int Damage;
-    RaycastHit2D hit;
+    RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 
     private void Start()
@@ -49,19 +49,19 @@ public class Tool : MonoBehaviour
         {
             case ToolType.Axe:
                 //Melee
-                hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance);
+                hits = Physics2D.RaycastAll(origin: transform.position, direction, rayastDistance);
                 //If hit => Do Damage
-                if(hit && hit.collider.transform.tag == "Player")
-                {
-                    hit.transform.gameObject.GetComponent<Movement>().Killed();
-                }else if(hit && hit.collider.transform.tag == "Tree")
-                {
-                    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
-                }
+                //if(hit && hit.collider.transform.tag == "Player")
+                //{
+                //    hit.transform.gameObject.GetComponent<Movement>().Killed();
+                //}else if(hit && hit.collider.transform.tag == "Tree")
+                //{
+                //    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
+                //}
                 break;
             case ToolType.WaterGun:
                 //Water
-                hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
+                //hit = Physics2D.Raycast(origin: transform.position, direction, rayastDistance * 5);
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
@@ -73,6 +73,19 @@ public class Tool : MonoBehaviour
         }
     }
 
+    public void Throw(Vector2 Direction)
+    {
+        transform.parent = null;
+    }
+
+    {
+        transform.parent = null;
+    }
+
+    {
+        transform.parent = null;
+    }
+
     public void Drop()
     {
         transform.parent = null;
@@ -81,6 +94,9 @@ public class Tool : MonoBehaviour
 
     public Tool PickUp(Transform player)
     {
+        if (thrown)
+            return null;
+
         transform.SetPositionAndRotation(transform.position, StandardRotation);
         transform.SetParent(player);
         _parent = player;
@@ -92,6 +108,7 @@ public class Tool : MonoBehaviour
         transform.parent = null;
         if (transform.parent == parent)
         {
+            transform.parent = null;
             StartCoroutine(Throwing(direction));
         }
     }
@@ -112,31 +129,42 @@ public class Tool : MonoBehaviour
                 switch (Direction.y)
                 {
                     case -1:
-                    direction = Vector3.down;
+                        direction = Vector3.down;
                         break;
                     case 1:
-                    direction = Vector3.up;
+                        direction = Vector3.up;
                         break;
                     default:
                         break;
                 }
                 break;
         }
-        while(thrown)
+        while (thrown)
         {
-            hit  = Physics2D.Raycast(origin: transform.position, direction, rayastDistance);
-            if (hit && hit.collider.gameObject.transform != _parent && hit.collider.gameObject != gameObject)
+            hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
+            foreach (RaycastHit2D h in hits)
             {
+                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
+                {
+                    thrown = false;
+                    //Do damage to hit player
+                    if (h.collider.gameObject.tag == "Player")
+                    {
+                        h.collider.GetComponent<Movement>().KnockBack(transform.position);
 
-                thrown = false;
-                //Do damage to hit player
-            }else
-            {
-                transform.Rotate(new Vector3(0,0,3));
-                transform.position += direction * Time.deltaTime * 10;
+                    }
+                }
+                else
+                {
+                    transform.Rotate(new Vector3(0, 0, 3));
+                    transform.position += direction * Time.deltaTime * 10;
+                }
             }
+            
             yield return null;
 
         }
     }
+
+
 }
