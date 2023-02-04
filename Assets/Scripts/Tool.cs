@@ -56,7 +56,7 @@ public class Tool : MonoBehaviour
     }
 	
 	public void FixedUpdate() {
-		if (_parent) {
+		if (_parent && !thrown ) {
 			eero_tool_shake_amount *= 0.9f;
 			
 			Vector3 delta = _parent.gameObject.GetComponent<Movement>().GetLastDir();
@@ -124,8 +124,7 @@ public class Tool : MonoBehaviour
 
     public void Drop()
     {
-        transform.parent = null;
-
+        _parent = null;
     }
 
     public Tool PickUp(Transform player)
@@ -143,7 +142,6 @@ public class Tool : MonoBehaviour
     {
         if(_parent == parent)
         {
-            transform.parent = null;
             StartCoroutine(Throwing(direction));
         }
     }
@@ -183,8 +181,10 @@ public class Tool : MonoBehaviour
                 {
                     thrown = false;
                     //Do damage to hit player
-                    if(h.collider.gameObject.tag == "Player")
+                    if (h.collider.gameObject.tag == "Player")
                     {
+                        h.collider.gameObject.GetComponent<Movement>().KnockBack(transform.position);
+
                         switch (tool)
                         {
                             case ToolType.Axe:
@@ -198,11 +198,13 @@ public class Tool : MonoBehaviour
                                 break;
                         }
                     }
+
+                    _parent = null;
                 }
                 else
                 {
                     transform.Rotate(new Vector3(0, 0, 3));
-                    transform.position += direction * Time.deltaTime * 10;
+                    transform.position += direction * Time.deltaTime * 15;
                 }
             }
             
