@@ -7,7 +7,9 @@ public enum ToolType
 {
     Axe,
     WaterGun,
-    BugSpray
+    Fertilizer,
+    Shovel,
+    SeedBag,
 }
 public class Tool : MonoBehaviour
 {
@@ -21,11 +23,18 @@ public class Tool : MonoBehaviour
     public int Damage;
     RaycastHit2D[] hits;
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
-
+	
 	public Collider2D eero_collider;
-
+	public Sprite[] eero_sprite_per_tool_type;
+	Vector3 eero_parent_prev_frame_position;
+	float eero_localScale_start;
+	float eero_tool_shake_amount = 0;
+	
     private void Start()
     {
+		GetComponent<SpriteRenderer>().sprite = eero_sprite_per_tool_type[(int)tool];
+		eero_localScale_start = transform.localScale.x;
+		
         if(col == null)
         {
             col = gameObject.AddComponent<CapsuleCollider2D>();
@@ -44,24 +53,32 @@ public class Tool : MonoBehaviour
         //    throwVector *= -1;
         //}
     }
+	
+	public void FixedUpdate() {
+		if (_parent) {
+			eero_tool_shake_amount *= 0.9f;
+			
+			Vector3 delta = _parent.gameObject.GetComponent<Movement>().GetLastDir();
+			float len = Vector3.Magnitude(delta);
+			if (len > 0.001f) {
+				Vector3 dir = delta / len;
+				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f, 40f*Time.fixedDeltaTime);
+				transform.localScale = eero_localScale_start * (dir.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(-1, -1, 1));
+				
+				float theta = Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x);
+				theta += 90f * eero_tool_shake_amount * (dir.x > 0 ? -1f : 1f);
+				transform.localRotation = Quaternion.Euler(0, 0, theta);
+			}
+			eero_parent_prev_frame_position = _parent.position;
+		}
+	}
+	
     public void Use(Vector2 direction)
     {
         print("Use");
         switch (tool)
         {
             case ToolType.Axe:
-<<<<<<< Updated upstream
-                //Melee
-                hits = Physics2D.RaycastAll(origin: transform.position, direction, rayastDistance);
-                //If hit => Do Damage
-                //if(hit && hit.collider.transform.tag == "Player")
-                //{
-                //    hit.transform.gameObject.GetComponent<Movement>().Killed();
-                //}else if(hit && hit.collider.transform.tag == "Tree")
-                //{
-                //    hit.transform.gameObject.GetComponent<Tree>().OnAxe();
-                //}
-=======
 				// @eero
  				Collider2D[] colliders = new Collider2D[10];
 				ContactFilter2D contactFilter = new ContactFilter2D();
@@ -71,7 +88,8 @@ public class Tool : MonoBehaviour
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
 					}
 				}
->>>>>>> Stashed changes
+				
+				eero_tool_shake_amount = 1;
                 break;
             case ToolType.WaterGun:
                 //Water
@@ -79,10 +97,11 @@ public class Tool : MonoBehaviour
                 //If hit == Player Do Damage
                 //Else if hit == tree => Give Water
                 break;
-            case ToolType.BugSpray:
-                //Pesticide
-                break;
+            //case ToolType.BugSpray:
+            //    //Pesticide
+            //    break;
             default:
+				print("TODO!!!!!!!!!!!!!");
                 break;
         }
     }
@@ -100,7 +119,7 @@ public class Tool : MonoBehaviour
             return null;
 
         transform.SetPositionAndRotation(transform.position, StandardRotation);
-        transform.SetParent(player);
+        //transform.SetParent(player);
         _parent = player;
         return this;
     }
