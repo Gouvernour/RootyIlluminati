@@ -32,7 +32,7 @@ public class Tool : MonoBehaviour
 	float eero_localScale_start;
 	float eero_tool_shake_amount = 0;
 	
-	public Object hole;
+	public GameObject hole;
 	
     private void Start()
     {
@@ -79,14 +79,17 @@ public class Tool : MonoBehaviour
 	
     public void Use(Vector2 direction)
     {
-        print("Use");
+		Collider2D[] colliders = new Collider2D[10];
+		ContactFilter2D contactFilter = new ContactFilter2D();
+		int colliderCount = eero_collider.OverlapCollider(contactFilter.NoFilter(), colliders);
+        
+		print("Use " + colliderCount);
+		
         switch (tool)
         {
             case ToolType.Axe:
-				// @eero
- 				Collider2D[] colliders = new Collider2D[10];
-				ContactFilter2D contactFilter = new ContactFilter2D();
-				int colliderCount = eero_collider.OverlapCollider(contactFilter, colliders);
+				eero_tool_shake_amount = 1;
+				
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Tree") {
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
@@ -96,7 +99,6 @@ public class Tool : MonoBehaviour
                     }
 				}
 				
-				eero_tool_shake_amount = 1;
                 break;
             case ToolType.WaterGun:
                 //Water
@@ -106,9 +108,27 @@ public class Tool : MonoBehaviour
                 break;
 				
 			case ToolType.Shovel:
+				eero_tool_shake_amount = 1;
+				
+				bool found_hole = false;
+				for (int i=0; i<colliderCount; i++) {
+					print("colliders[i].gameObject.tag " + colliders[i].gameObject.tag);
+					if (colliders[i].gameObject.tag == "Holee") {
+						GameObject hole_sprite = colliders[i].gameObject.transform.GetChild(0).gameObject;
+						float s = hole_sprite.transform.localScale.x;
+						if (s < 1) {
+							float new_s = s + 0.1f;
+							hole_sprite.transform.localScale = new Vector3(new_s, new_s, new_s);
+						}
+						found_hole = true;
+					}
+				}
+				if (!found_hole) {
+					GameObject h = Instantiate(hole, transform.position, Quaternion.identity);
+					//h.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+				}
 				
 				break;
-				
             //case ToolType.BugSpray:
             //    //Pesticide
             //    break;

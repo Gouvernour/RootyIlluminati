@@ -857,6 +857,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2881396472502171518, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
+      propertyPath: hole
+      value: 
+      objectReference: {fileID: 3400047582755930865, guid: aa42d7f9409dea74b9c8c7d2c928ec24, type: 3}
+    - target: {fileID: 2881396472502171518, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
+      propertyPath: tool
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2881396472502171519, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
       propertyPath: m_Name
       value: Tool
