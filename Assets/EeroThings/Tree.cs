@@ -54,25 +54,30 @@ public class Tree : MonoBehaviour {
 		wish_sprite_renderer.sprite = wish_sprites[(int)active_wish];
 		
 		next_wish_timer -= Time.fixedDeltaTime;
-		if (next_wish_timer < 0 && active_wish == WishKind.None) {
-			active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
-		}
 		
-		// should grow?
 		
 		WishCloud.SetActive(active_wish != WishKind.None);
 		
+		// should grow?
 		if (active_wish == WishKind.None && grown_percentage < 1f) {
-			int sprite_index = (int)(grown_percentage*50f * sprites.Length);
+			
+			if (next_wish_timer < 0) {
+				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
+			}
+			
+			int sprite_index = (int)(grown_percentage * sprites.Length);
 			sprite_renderer.sprite = sprites[sprite_index % sprites.Length];
 			
-			grown_percentage += 0.02f*Time.fixedDeltaTime;
+			grown_percentage += 0.15f*Time.fixedDeltaTime;
+			//grown_percentage += 0.02f*Time.fixedDeltaTime;
 			
-			float s = grown_percentage*grown_percentage;
-			root.transform.localScale = new Vector3(grown_percentage, grown_percentage, 1);
+			float s = 0.4f*grown_percentage + 0.2f;
+			root.transform.localScale = new Vector3(s, s, 1);
 			
-			WishCloud.transform.localPosition = new Vector3(0, grown_percentage * 3f + 1f, 0);
+			WishCloud.transform.localPosition = new Vector3(0, grown_percentage * 3.2f + 0.9f, 0);
 		}
+		
+		//if (grown_percentage > 1) grown_percentage = 0; // reset
 	}
 	
 	void Update() {
