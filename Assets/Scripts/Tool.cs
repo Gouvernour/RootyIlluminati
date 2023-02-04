@@ -102,11 +102,11 @@ public class Tool : MonoBehaviour
                 {
                     if(hit.collider.gameObject.tag == "Tree")
                     {
-
+                        hit.collider.gameObject.GetComponent<Tree>().OnAxe();
                     }
                     if(hit.collider.gameObject.tag == "Player")
                     {
-
+                        hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
                     }
                 }
                 //If hit == Player Do Damage
