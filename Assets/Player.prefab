@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5850551447723665271}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,10 +119,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acc: 0.5
-  decc: 5
+  decc: 0.35
   maxVel: 5
   dashDuration: 0.1
   dashSpeed: 15
+  knockBackDuration: 0.1
+  knockBackSpeed: 20
+  spawnPoint: {fileID: 0}
 --- !u!61 &5642315583656586727
 BoxCollider2D:
   m_ObjectHideFlags: 0
