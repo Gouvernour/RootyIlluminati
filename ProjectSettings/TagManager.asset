@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Tool
   - Tree
+  - Holee
   layers:
   - Default
   - TransparentFX

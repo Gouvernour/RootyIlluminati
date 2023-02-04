@@ -59,7 +59,9 @@ public class Movement : MonoBehaviour
     {
         dashTriggered = _ctx.action.triggered;
     }
-
+	
+	public Vector2 GetLastDir() { return lastDir; }
+	
     public void OnUse(InputAction.CallbackContext _ctx)
     {
         if (!currentTool)
@@ -210,15 +212,6 @@ public class Movement : MonoBehaviour
     {
         transform.position = spawnPoint.position;
         currentState = MovementState.still;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Killed();
-            KnockBack(collision.transform.position);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
