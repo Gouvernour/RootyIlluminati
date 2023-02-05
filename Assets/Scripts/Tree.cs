@@ -42,9 +42,13 @@ public class Tree : MonoBehaviour {
 	
 	float growing_speed = 0;
 	
+	bool tanookiTree = false;
+	
 	// Start is called before the first frame update
 	void Start() {
-		next_wish_timer = Random.Range(4f, 8f);
+		tanookiTree = ScoreManager.instance.tanookiPlanting;
+		
+		next_wish_timer = 1f;//Random.Range(4f, 8f);
 		ScoreManager.instance.AddTree(this);
 	}
 	
@@ -58,7 +62,7 @@ public class Tree : MonoBehaviour {
 			
 			if (active_wishes_remaining == 0) {
 				// fulfilled the wish!
-				next_wish_timer = Random.Range(4f, 8f);
+				next_wish_timer = 1; //Random.Range(4f, 8f);
 			}
 		}
 	}
@@ -77,16 +81,23 @@ public class Tree : MonoBehaviour {
 	//	return 5 + (int)(grown_percentage * 5f);
 	//}
 	
-	public int GetSpriteIndex() { return (int)(grown_percentage * sprites.Length); }
+	int stage = 0;
+	
+	int GetSpriteIndex() {
+		int index = stage;
+		if (tanookiTree && index >= 3) index += 2;
+		return index;
+	}
 	
 	public void OnAxe() {
 		if (dead) return;
 		//print("OnAxe");
 		is_axing = true;
 		reset_hp_timer = 0.5f;
-		//hp--;
 		//ReceiveTreatment(WishKind.Axe);
 		if (axing_complete_percentage >= 1) {
+			ScoreManager.instance.RemoveTree(this);
+			
 			dead = true;
 			GameObject top = Instantiate(cut_tree_top_object, transform.position, Quaternion.identity);
 			top.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-3f, 3f), ForceMode2D.Impulse);
@@ -145,8 +156,10 @@ public class Tree : MonoBehaviour {
 			}
 		}*/
 		
+		stage = (int)(grown_percentage * sprites.Length);
 		int sprite_index = GetSpriteIndex();
 		
+		//print("active_wishes_remaining ")
 		if (dead) {
 			//fallen_over_ratio += 2f*Time.fixedDeltaTime;
 			//if (fallen_over_ratio > 1) fallen_over_ratio = 1;
@@ -156,7 +169,9 @@ public class Tree : MonoBehaviour {
 			return;
 		}
 		
-		if (active_wishes_remaining == 0 && sprite_index <= 4) { // should grow?
+		sprite_renderer.sprite = sprites[sprite_index % sprites.Length];
+		
+		if (active_wishes_remaining == 0 && stage < 4) { // should grow?
 			
 			if (next_wish_timer < 0) {
 				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
@@ -164,13 +179,11 @@ public class Tree : MonoBehaviour {
 				active_wishes_remaining = 1;
 			}
 			
-			sprite_renderer.sprite = sprites[sprite_index % sprites.Length];
-			
 			//grown_percentage += 0.15f*Time.fixedDeltaTime;
 			grown_percentage += 1.25f*growing_speed*Time.fixedDeltaTime;
 			//print("grown_percentage " + grown_percentage);
 			
-			float s = 0.2f*grown_percentage + 1f;
+			float s = 0.17f*grown_percentage + 1f;
 			root.transform.localScale = new Vector3(s, s, 1);	
 			WishCloud.transform.localPosition = new Vector3(0.5f, grown_percentage * 3.2f + 1.5f, 0);
 		}

@@ -119,7 +119,7 @@ public class Tool : MonoBehaviour
 		ContactFilter2D contactFilter = new ContactFilter2D();
 		int colliderCount = eero_collider.OverlapCollider(contactFilter.NoFilter(), colliders);
         
-		print("Use ");
+		//print("Use ");
 		
         switch (tool)
         {
