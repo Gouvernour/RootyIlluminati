@@ -122,7 +122,7 @@ public class Tool : MonoBehaviour
             case ToolType.WaterGun:
                 //Water
 
-                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance*10);
+                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance*7.5f);
                 foreach (RaycastHit2D hit in hits)
                 {
                     if (hit.collider.transform != _parent)
@@ -270,7 +270,8 @@ public class Tool : MonoBehaviour
             hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
-                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject && h.collider.gameObject.tag != "Tool")
+                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject 
+                    && h.collider.gameObject.tag != "Tool" && h.collider.gameObject.tag != "Holee")
                 {
                     thrown = false;
                     //Do damage to hit player
