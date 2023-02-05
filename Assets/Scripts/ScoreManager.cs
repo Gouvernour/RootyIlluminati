@@ -106,7 +106,7 @@ public class ScoreManager : MonoBehaviour
         if(tanookiPlanting)
         {
             TanookiTrees.Add(new c_Tree());
-            c_Tree newTree = TanookiTrees[RaccoonTrees.Count - 1];
+            c_Tree newTree = TanookiTrees[TanookiTrees.Count - 1];
             newTree.tree = tree;
             newTree.team = Team.Tanooki;
             newTree.stage = TreeStage.One;
@@ -193,5 +193,26 @@ public class ScoreManager : MonoBehaviour
         print("Racoon score = " + RaccoonScore);
         tempScore = 0;
         StartCoroutine(ScoreUpdates());
+    }
+
+    public void SetPlayers()
+    {
+        StopAllCoroutines();
+        GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject Object in gameobjects)
+        {
+            players.Add(Object);
+            if (Object.name == "Raccoon")
+            {
+                TeamRaccon.Add(Object);
+            }
+            else if (Object.name == "Tanooki")
+            {
+                TeamTanooki.Add(Object);
+            }
+        }
+        StartCoroutine(ScoreUpdates());
+        timeLeft = roundTime;
+
     }
 }
