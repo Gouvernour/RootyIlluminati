@@ -96,6 +96,7 @@ MonoBehaviour:
   - {fileID: -456339958, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 702292884, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: -424601795, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: 21300000, guid: d90b248cc80014c499d4f8335ec864ad, type: 3}
 --- !u!212 &852694294201039680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 5081094950566893578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7110354620319674855}
@@ -338,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 7938691581049349421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.11, y: 0.47, z: -0.61}
-  m_LocalScale: {x: 0.5164209, y: 0.5164209, z: 0.5164209}
+  m_LocalScale: {x: 0.60772413, y: 0.60772413, z: 0.60772413}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2740104627785179615}
@@ -406,13 +407,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2740104627785179615}
   - component: {fileID: 6863018563272734589}
+  - component: {fileID: 123269160489391424}
   m_Layer: 0
   m_Name: WishCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2740104627785179615
 Transform:
   m_ObjectHideFlags: 0
@@ -422,7 +424,7 @@ Transform:
   m_GameObject: {fileID: 8507434083598787683}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4.388, z: -0.235}
-  m_LocalScale: {x: 0.32434255, y: 0.32434255, z: 0.32434255}
+  m_LocalScale: {x: 0.5336084, y: 0.5336084, z: 0.5336084}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4107088165094925584}
@@ -481,3 +483,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &123269160489391424
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507434083598787683}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 100
