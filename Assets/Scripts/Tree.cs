@@ -41,6 +41,7 @@ public class Tree : MonoBehaviour {
 	// Start is called before the first frame update
 	void Start() {
 		next_wish_timer = Random.Range(4f, 8f);
+		ScoreManager.instance.AddTree(this);
 	}
 	
 	float shake_amount = 0f;

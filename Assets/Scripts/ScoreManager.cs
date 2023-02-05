@@ -25,15 +25,16 @@ public enum Team
 
 public class ScoreManager : MonoBehaviour
 {
-    List<GameObject> players;
-    List<GameObject> TeamTanooki;
-    List<GameObject> TeamRaccon;
-    List<c_Tree> RaccoonTrees;
-    List<c_Tree> TanookiTrees;
-    bool tanookiPlanting;
-    static public ScoreManager instance;
-    int TanookiScore= 0;
-    int RaccoonScore = 0;
+    [SerializeField] List<GameObject> players = new List<GameObject>();
+    [SerializeField] List<GameObject> TeamTanooki = new List<GameObject>();
+    [SerializeField] List<GameObject> TeamRaccon = new List<GameObject>();
+    [SerializeField] List<c_Tree> RaccoonTrees = new List<c_Tree>();
+    [SerializeField] List<c_Tree> TanookiTrees = new List<c_Tree>();
+    [SerializeField] bool tanookiPlanting;
+    [SerializeField] static public ScoreManager instance;
+    [SerializeField] int TanookiScore= 0;
+    [SerializeField] int RaccoonScore = 0;
+    [SerializeField] int[] scoreValue = new int[5] {0, 1, 3, 5, 9};
 
     void Start()
     {
@@ -41,7 +42,8 @@ public class ScoreManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
-        GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("Respawn");
+        DontDestroyOnLoad(gameObject);
+        GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject Object in gameobjects)
         {
             players.Add(Object);
@@ -53,6 +55,7 @@ public class ScoreManager : MonoBehaviour
                 TeamTanooki.Add(Object);
             }
         }
+        StartCoroutine(ScoreUpdates());
     }
 
     // Update is called once per frame
@@ -66,7 +69,7 @@ public class ScoreManager : MonoBehaviour
         if(tanookiPlanting)
         {
             TanookiTrees.Add(new c_Tree());
-            c_Tree newTree = RaccoonTrees[RaccoonTrees.Count - 1];
+            c_Tree newTree = TanookiTrees[RaccoonTrees.Count - 1];
             newTree.tree = tree;
             newTree.team = Team.Tanooki;
             newTree.stage = TreeStage.One;
@@ -75,6 +78,9 @@ public class ScoreManager : MonoBehaviour
         {
             RaccoonTrees.Add(new c_Tree());
             c_Tree newTree = RaccoonTrees[RaccoonTrees.Count - 1];
+            newTree.tree = tree;
+            newTree.team = Team.Tanooki;
+            newTree.stage = TreeStage.One;
         }
     }
 
@@ -115,16 +121,17 @@ public class ScoreManager : MonoBehaviour
 
     IEnumerator ScoreUpdates()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(.5f);
         int tempScore = 0;
-        foreach(c_Tree t in TanookiTrees)
+        foreach (c_Tree t in TanookiTrees)
         {
             int spriteIndex = 0;
-            foreach(Sprite m_sprite in t.tree.sprites)
+            foreach (Sprite m_sprite in t.tree.sprites)
             {
-                if(m_sprite == t.tree.sprite_renderer.sprite)
+                if (m_sprite == t.tree.sprite_renderer.sprite)
                 {
-
+                    tempScore += scoreValue[spriteIndex];
+                    break;
                 }
                 spriteIndex++;
             }
@@ -133,9 +140,21 @@ public class ScoreManager : MonoBehaviour
         tempScore = 0;
         foreach (c_Tree t in RaccoonTrees)
         {
-
+            int spriteIndex = 0;
+            foreach (Sprite m_sprite in t.tree.sprites)
+            {
+                if (m_sprite == t.tree.sprite_renderer.sprite)
+                {
+                    tempScore += scoreValue[spriteIndex];
+                    break;
+                }
+                spriteIndex++;
+            }
         }
         RaccoonScore = tempScore;
+        print("Tanooki score = " + TanookiScore);
+        print("Racoon score = " + RaccoonScore);
         tempScore = 0;
+        StartCoroutine(ScoreUpdates());
     }
 }
