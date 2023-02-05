@@ -52,7 +52,7 @@ public class Tree : MonoBehaviour {
 	
 	void ReceiveTreatment(WishKind kind) {
 		if (active_wishes_remaining > 0 && kind == active_wish) {
-			shake_amount = 0.5f;
+			shake_amount = 2f;
 			active_wishes_remaining--;
 			growing_speed = 1;
 			
@@ -66,7 +66,11 @@ public class Tree : MonoBehaviour {
 	
 	// when you axe, this goes to 1. When this goes to 0, reset HP.
 	float reset_hp_timer = 0;
-	int hp = 5;
+	bool is_axing = false;
+	float axing_complete_percentage = 0;
+	bool dead = false;
+	//int hp = 5;
+	
 	//float fallen_over_ratio = 0;
 	
 	//int GetMaxHP() {
@@ -76,11 +80,14 @@ public class Tree : MonoBehaviour {
 	public int GetSpriteIndex() { return (int)(grown_percentage * sprites.Length); }
 	
 	public void OnAxe() {
+		if (dead) return;
 		//print("OnAxe");
-		reset_hp_timer = 1;
-		hp--;
+		is_axing = true;
+		reset_hp_timer = 0.5f;
+		//hp--;
 		//ReceiveTreatment(WishKind.Axe);
-		if (hp == 0) {
+		if (axing_complete_percentage >= 1) {
+			dead = true;
 			GameObject top = Instantiate(cut_tree_top_object, transform.position, Quaternion.identity);
 			top.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-3f, 3f), ForceMode2D.Impulse);
 			top.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-3f, 3f), 1f), ForceMode2D.Impulse);
@@ -115,11 +122,17 @@ public class Tree : MonoBehaviour {
 		next_wish_timer -= Time.fixedDeltaTime;
 		reset_hp_timer -= Time.fixedDeltaTime;
 		
-		if (hp > 0 && reset_hp_timer < 0) {
-			hp = 5; //GetMaxHP();
+		if (is_axing) {
+			const float axing_time = 4f;
+			axing_complete_percentage += Time.fixedDeltaTime / axing_time;
 		}
 		
-		WishCloud.SetActive(hp > 0 && active_wishes_remaining > 0);
+		if (!dead && reset_hp_timer < 0) {
+			axing_complete_percentage = 0; //hp = 5; //GetMaxHP();
+			is_axing = false;
+		}
+		
+		WishCloud.SetActive(!dead && active_wishes_remaining > 0);
 		
 		shake_amount *= 0.9f;
 		growing_speed *= 0.9f;
@@ -134,8 +147,7 @@ public class Tree : MonoBehaviour {
 		
 		int sprite_index = GetSpriteIndex();
 		
-		if (hp <= 0) {
-			// dead tree
+		if (dead) {
 			//fallen_over_ratio += 2f*Time.fixedDeltaTime;
 			//if (fallen_over_ratio > 1) fallen_over_ratio = 1;
 			
@@ -163,7 +175,8 @@ public class Tree : MonoBehaviour {
 			WishCloud.transform.localPosition = new Vector3(0.5f, grown_percentage * 3.2f + 1.5f, 0);
 		}
 		
-		root.transform.localRotation = Quaternion.Euler(0, 0, 20f * shake_amount * Mathf.Sin(Time.time*25f));
+		float shake = 20f * shake_amount * (0.2f + 2.5f*axing_complete_percentage);
+		root.transform.localRotation = Quaternion.Euler(0, 0, shake * Mathf.Sin(Time.time*25f));
 		
 		//if (grown_percentage > 1) grown_percentage = 0; // reset
 	}
