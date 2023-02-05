@@ -60,7 +60,7 @@ public class ScoreManager : MonoBehaviour
             if(Object.name == "Raccoon")
             {
                 TeamRaccon.Add(Object);
-            }else if(Object.name == "Tanooki")
+            }else
             {
                 TeamTanooki.Add(Object);
             }
@@ -128,11 +128,10 @@ public class ScoreManager : MonoBehaviour
             if(player == p)
             {
                 tanookiPlanting = true;
-            }else
-            {
-                tanookiPlanting = false;
+                return;
             }
         }
+        tanookiPlanting = false;
     }
 
     public void RemoveTree(Tree tree)
@@ -162,31 +161,13 @@ public class ScoreManager : MonoBehaviour
         int tempScore = 0;
         foreach (c_Tree t in TanookiTrees)
         {
-            int spriteIndex = 0;
-            foreach (Sprite m_sprite in t.tree.sprites)
-            {
-                if (m_sprite == t.tree.sprite_renderer.sprite)
-                {
-                    tempScore += scoreValue[spriteIndex];
-                    break;
-                }
-                spriteIndex++;
-            }
+            tempScore += scoreValue[t.tree.stage];
         }
         TanookiScore = tempScore;
         tempScore = 0;
         foreach (c_Tree t in RaccoonTrees)
         {
-            int spriteIndex = 0;
-            foreach (Sprite m_sprite in t.tree.sprites)
-            {
-                if (m_sprite == t.tree.sprite_renderer.sprite)
-                {
-                    tempScore += scoreValue[spriteIndex];
-                    break;
-                }
-                spriteIndex++;
-            }
+            tempScore += scoreValue[t.tree.stage];
         }
         RaccoonScore = tempScore;
         print("Tanooki score = " + TanookiScore);
@@ -206,7 +187,7 @@ public class ScoreManager : MonoBehaviour
             {
                 TeamRaccon.Add(Object);
             }
-            else if (Object.name == "Tanooki")
+            else
             {
                 TeamTanooki.Add(Object);
             }
