@@ -92,18 +92,24 @@ MonoBehaviour:
   - {fileID: 1317739003, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
   - {fileID: -1439939111, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
   - {fileID: -523528430, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
+  - {fileID: 521933512, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
+  - {fileID: -227287724, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
   trunk_sprites:
   - {fileID: -659128650, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: 1934792158, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: 1925798686, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: -380357948, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: 1030802536, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 432161078, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: -185919678, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   cut_top_sprites:
   - {fileID: -1203616984, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: -731965020, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: -1730877167, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: 350913337, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   - {fileID: 1365054481, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 521933512, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
+  - {fileID: -227287724, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
   wish_sprites:
   - {fileID: -456339958, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 702292884, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
