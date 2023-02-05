@@ -56,12 +56,14 @@ public class GameManager : MonoBehaviour
         {
             GameObject g = Instantiate(tanookiAnim, input.transform);
             input.GetComponent<Movement>().anim = g.GetComponent<Animator>();
+            input.GetComponent<Movement>().walk = g.transform.GetChild(1).GetComponent<ParticleSystem>();
             input.name = "Tanooki";
         }
         else
         {
             GameObject g = Instantiate(raccoonAnim, input.transform);
             input.GetComponent<Movement>().anim = g.GetComponent<Animator>();
+            input.GetComponent<Movement>().walk = g.transform.GetChild(1).GetComponent<ParticleSystem>();
             input.name = "Raccoon";
         }
         if (SceneManager.GetActiveScene().name == "PlayerSpawningTest")

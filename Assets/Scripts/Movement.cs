@@ -48,13 +48,21 @@ public class Movement : MonoBehaviour
 
     public Animator anim;
 
+    public ParticleSystem walk;
+
     public void OnMove(InputAction.CallbackContext _ctx)
     {
         if (currentState == MovementState.still || currentState == MovementState.moving)
         {
             if (currentState == MovementState.still)
             {
-                AudioManager.instance.Play("Walking");
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.Play("Walking");
+
+
+                }
+                walk.Play();
 
             }
             currentState = MovementState.moving;
@@ -71,6 +79,7 @@ public class Movement : MonoBehaviour
 
                 AudioManager.instance.Stop("Walking");
                 anim.Play("Idle");
+                walk.Stop();
             }
         }
     }
