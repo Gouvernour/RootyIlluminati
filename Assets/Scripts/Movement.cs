@@ -136,20 +136,28 @@ public class Movement : MonoBehaviour
         }
         else if (useTriggered && usePressed)
         {
-            if (currentTool.tool == ToolType.WaterGun)
+            if (currentTool != null)
             {
-                currentTool.Use(lastDir);
+                if (currentTool.tool == ToolType.WaterGun)
+                {
+                    currentTool.Use(lastDir);
+                }
             }
+                
         }
         else if (!useTriggered && usePressed)
         {
             usePressed = false;
 
-            if (currentTool.tool == ToolType.WaterGun)
+            if (currentTool != null)
             {
-                currentTool.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
-                currentTool.transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
+                if (currentTool.tool == ToolType.WaterGun)
+                {
+                    currentTool.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+                    currentTool.transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
+                }
             }
+                
         }
 
         if (dead)
