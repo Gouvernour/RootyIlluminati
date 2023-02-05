@@ -85,6 +85,11 @@ public class ScoreManager : MonoBehaviour
                 SceneManager.LoadScene("EndScreen");
 
                 SceneManager.sceneLoaded += GameManager.instance.OnSceneLoaded;
+                GameObject obj = GameObject.Find("EndCanvas");
+                if (TanookiScore > RaccoonScore)
+                    obj.GetComponent<MenuScript>().text.text = "Tanookis!";
+                else
+                    obj.GetComponent<MenuScript>().text.text = "Racoons!";
 
             }
         }else
