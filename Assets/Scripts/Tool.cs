@@ -251,6 +251,10 @@ public class Tool : MonoBehaviour
                                 break;
                         }
                     }
+                    if(h.collider.gameObject.tag == "Wall")
+                    {
+                        transform.position -= direction * Time.deltaTime * 500;
+                    }
 
                     _parent = null;
                 }
