@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GetComponent<PlayerInputManager>().enabled = false;
+            GetComponent<PlayerInputManager>().DisableJoining();
         }
     }
 
@@ -69,22 +69,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenScene(string name)
+    
+
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SceneManager.LoadScene(name);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-
         if (SceneManager.GetActiveScene().name == "PlayerSpawningTest" || SceneManager.GetActiveScene().name == "Main")
         {
-            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
-            GetComponent<PlayerInputManager>().enabled = true;
+            if (SceneManager.GetActiveScene().name == "Main")
+            {
+                GetComponent<PlayerInputManager>().DisableJoining();
+            }
+            else
+            {
+                GetComponent<PlayerInputManager>().EnableJoining();
+            }
 
+            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
             for (int i = 0; i < players.Count; i++)
             {
                 players[i].transform.position = spawnPositionsParent.GetChild(i).position;
@@ -101,8 +102,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
-
     }
 }

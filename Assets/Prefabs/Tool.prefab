@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_Sprite: {fileID: -424601795, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,13 +104,14 @@ MonoBehaviour:
   tool: 0
   Damage: 1
   StandardRotation: {x: 0, y: 0, z: 0, w: 1}
-  eero_collider: {fileID: 2189078477984163945}
   eero_sprite_per_tool_type:
   - {fileID: -424601795, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: -456339958, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 702292884, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 904911896, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 1652830909, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: 1009828014, guid: 5fcbefe690a67b94f9e0d4e1b3e9af39, type: 3}
+  eero_collider: {fileID: 2189078477984163945}
   hole: {fileID: 0}
 --- !u!58 &2189078477984163945
 CircleCollider2D:

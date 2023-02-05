@@ -26,8 +26,8 @@ public class Tool : MonoBehaviour
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
 	
-	public Collider2D eero_collider;
 	public Sprite[] eero_sprite_per_tool_type;
+	public Collider2D eero_collider;
 	Vector3 eero_parent_prev_frame_position;
 	float eero_localScale_start;
 	float eero_tool_shake_amount = 0;
@@ -66,7 +66,7 @@ public class Tool : MonoBehaviour
 			float len = Vector3.Magnitude(delta);
 			if (len > 0.001f) {
 				Vector3 dir = delta / len;
-				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f, 40f*Time.fixedDeltaTime);
+				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f + new Vector3(0, -0.1f, 0), 40f*Time.fixedDeltaTime);
 				transform.localScale = eero_localScale_start * (dir.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(-1, -1, 1));
 				
 				float theta = Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x);
@@ -74,6 +74,26 @@ public class Tool : MonoBehaviour
 				transform.localRotation = Quaternion.Euler(0, 0, theta);
 			}
 			eero_parent_prev_frame_position = _parent.position;
+
+            if (tool == ToolType.WaterGun)
+            {
+                if (delta.x > 0)
+                {
+                    transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, 90);
+                    transform.GetChild(1).localRotation = Quaternion.Euler(0, 0, 90);
+                }
+                else
+                {
+                    transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, -90);
+                    transform.GetChild(1).localRotation = Quaternion.Euler(0, 0, -90);
+                }
+
+                float a = Mathf.Atan2((delta / len).y, (delta / len).x);
+                var main = transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                main.startRotation = a - Mathf.PI/2;
+                main = transform.GetChild(1).GetComponent<ParticleSystem>().main;
+                main.startRotation = a - Mathf.PI / 2;
+            }
 		}
 	}
 	
@@ -104,16 +124,17 @@ public class Tool : MonoBehaviour
                 break;
             case ToolType.WaterGun:
                 //Water
-                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance * 5);
+
+                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance*7.5f);
                 foreach (RaycastHit2D hit in hits)
                 {
-                    if(hit.collider.transform != _parent)
+                    if (hit.collider.transform != _parent)
                     {
-                        if(hit.collider.gameObject.tag == "Tree")
+                        if (hit.collider.gameObject.tag == "Tree")
                         {
-                            hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                            hit.collider.gameObject.GetComponent<Tree>().OnWater();
                         }
-                        if(hit.collider.gameObject.tag == "Player")
+                        if (hit.collider.gameObject.tag == "Player")
                         {
                             hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
                         }
@@ -190,6 +211,8 @@ public class Tool : MonoBehaviour
     }
 
 
+
+
     public void Drop()
     {
         _parent = null;
@@ -250,7 +273,8 @@ public class Tool : MonoBehaviour
             hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
-                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject && h.collider.gameObject.tag != "Tool")
+                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject 
+                    && h.collider.gameObject.tag != "Tool" && h.collider.gameObject.tag != "Holee")
                 {
                     thrown = false;
                     //Do damage to hit player
