@@ -74,6 +74,23 @@ public class Tool : MonoBehaviour
 				transform.localRotation = Quaternion.Euler(0, 0, theta);
 			}
 			eero_parent_prev_frame_position = _parent.position;
+
+            if (tool == ToolType.WaterGun)
+            {
+                if (delta.x > 0)
+                {
+                    transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, 90);
+                    transform.GetChild(1).localRotation = Quaternion.Euler(0, 0, 90);
+                }
+                else
+                {
+                    transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, -90);
+                    transform.GetChild(1).localRotation = Quaternion.Euler(0, 0, -90);
+                }
+
+                var main = transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                main.startRotation = transform.localEulerAngles.z;
+            }
 		}
 	}
 	
@@ -104,16 +121,17 @@ public class Tool : MonoBehaviour
                 break;
             case ToolType.WaterGun:
                 //Water
-                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance * 5);
+
+                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance*10);
                 foreach (RaycastHit2D hit in hits)
                 {
-                    if(hit.collider.transform != _parent)
+                    if (hit.collider.transform != _parent)
                     {
-                        if(hit.collider.gameObject.tag == "Tree")
+                        if (hit.collider.gameObject.tag == "Tree")
                         {
                             hit.collider.gameObject.GetComponent<Tree>().OnWater();
                         }
-                        if(hit.collider.gameObject.tag == "Player")
+                        if (hit.collider.gameObject.tag == "Player")
                         {
                             hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
                         }
@@ -188,6 +206,8 @@ public class Tool : MonoBehaviour
                 break;
         }
     }
+
+
 
 
     public void Drop()
