@@ -39,6 +39,9 @@ public class Movement : MonoBehaviour
 
     //hp and spawn
     bool dead;
+	int eero_hp = 3;
+	float eero_reset_hp_timer = 0; // reset HP when reaches 0
+	
     float respawnTimer;
     public float respawnDuration;
     [HideInInspector] public Transform spawnPoint;
@@ -164,6 +167,7 @@ public class Movement : MonoBehaviour
             {
                 Respawn();
                 dead = false;
+				eero_hp = 3;
             }
         }
 
@@ -171,6 +175,11 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+		eero_reset_hp_timer -= Time.fixedDeltaTime;
+		if (eero_reset_hp_timer <= 0) {
+			eero_hp = 3;
+		}
+		
         if (dead)
         {
             return;
@@ -242,10 +251,15 @@ public class Movement : MonoBehaviour
 
     public void Killed()
     {
-        dead = true;
-        respawnTimer = respawnDuration;
-        rBod.velocity = Vector2.zero;
-        anim.Play("Dead");
+		eero_reset_hp_timer = 1;
+		eero_hp--;
+		print("eero_hp " + eero_hp);
+		if (eero_hp == 0) {
+			dead = true;
+			respawnTimer = respawnDuration;
+			rBod.velocity = Vector2.zero;
+			anim.Play("Dead");
+		}
     }
 
     public void KnockBack(Vector3 dir)

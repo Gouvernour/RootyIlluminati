@@ -177,8 +177,8 @@ public class ScoreManager : MonoBehaviour
             tempScore += scoreValue[t.tree.stage];
         }
         RaccoonScore = tempScore;
-        print("Tanooki score = " + TanookiScore);
-        print("Racoon score = " + RaccoonScore);
+        //print("Tanooki score = " + TanookiScore);
+        //print("Racoon score = " + RaccoonScore);
         tempScore = 0;
         StartCoroutine(ScoreUpdates());
     }
