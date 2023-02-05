@@ -135,7 +135,9 @@ public class Tool : MonoBehaviour
 					}
 				}
 				if (!found_hole) {
-					Instantiate(hole, transform.position, Quaternion.identity);
+					Vector3 new_hole_pos = transform.position;
+					new_hole_pos.y -= 1f;
+					Instantiate(hole, new_hole_pos, Quaternion.identity);
 				}
 				
 				break;
@@ -145,11 +147,29 @@ public class Tool : MonoBehaviour
 				
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Holee") {
-						colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant();
+						if (colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant()) {
+							break;
+						}
 					}
 				}
 				
 				break;
+            //case ToolType.BugSpray:
+            //    //Pesticide
+            //    break;
+			
+			case ToolType.Fertilizer:
+				for (int i = 0; i < colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Tree") {
+						colliders[i].gameObject.GetComponent<Tree>().OnFertilize();
+					}
+					else if (colliders[i].gameObject.tag == "Playyer")
+					{
+						//colliders[i].gameObject.GetComponent<Movement>().Killed();
+					}
+				}
+				break;
+			
             case ToolType.BugSpray:
                 for (int i = 0; i < colliderCount; i++)
                 {

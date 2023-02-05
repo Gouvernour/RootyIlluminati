@@ -8,14 +8,16 @@ public class HoleScript : MonoBehaviour
 	bool is_complete = false;
 	
 	public GameObject tree_object;
+	public Sprite dug_hole_sprite;
 	
-	public void TryToPlant() {
-		if (has_plant) return;
-		if (!is_complete) return;
+	public bool TryToPlant() {
+		if (has_plant) return false;
+		if (!is_complete) return false;
 		
 		has_plant = true;
 		
 		Instantiate(tree_object, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+		return true;
 		//print("plant!!!!!!!");
 	}
 	
@@ -29,6 +31,7 @@ public class HoleScript : MonoBehaviour
 		}
 		else {
 			is_complete = true;
+			hole_sprite.GetComponent<SpriteRenderer>().sprite = dug_hole_sprite;
 		}
 	}
 	
