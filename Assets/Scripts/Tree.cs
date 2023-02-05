@@ -25,6 +25,7 @@ public class Tree : MonoBehaviour {
 		Water,
 		Fertilize,
 		Axe,
+		Spray,
 	}
 	
 	//----------------------
@@ -33,24 +34,30 @@ public class Tree : MonoBehaviour {
 	int active_wishes_remaining = 0;
 	
 	float grown_percentage = 0f;
-	float next_wish_timer = 3f;
+	float next_wish_timer = 0;
+	
+	float growing_speed = 0;
 	
 	// Start is called before the first frame update
 	void Start() {
+		next_wish_timer = Random.Range(4f, 8f);
 	}
+	
+	float shake_amount = 0f;
 	
 	void ReceiveTreatment(WishKind kind) {
 		if (active_wishes_remaining > 0 && kind == active_wish) {
+			shake_amount = 0.5f;
 			active_wishes_remaining--;
+			growing_speed = 1;
 			
 			if (active_wishes_remaining == 0) {
 				// fulfilled the wish!
-				next_wish_timer = 3f;
+				next_wish_timer = Random.Range(4f, 8f);
 			}
 		}
 	}
 	
-	float axe_shake_amount = 0f;
 	
 	// when you axe, this goes to 1. When this goes to 0, reset HP.
 	float reset_hp_timer = 0;
@@ -61,15 +68,17 @@ public class Tree : MonoBehaviour {
 	//	return 5 + (int)(grown_percentage * 5f);
 	//}
 	
-	public void OnSpray() {
-	}
 	
 	public void OnAxe() {
 		print("OnAxe");
-		axe_shake_amount = 1;
 		reset_hp_timer = 1;
 		hp--;
 		ReceiveTreatment(WishKind.Axe);
+		shake_amount = 1;
+	}
+	
+	public void OnSpray() {
+		ReceiveTreatment(WishKind.Spray);
 	}
 	
 	public void OnFertilize() {
@@ -80,7 +89,7 @@ public class Tree : MonoBehaviour {
 		ReceiveTreatment(WishKind.Water);
 	}
 	
-	float test_timer = 1f;
+	//float test_timer = 1f;
 	
 	void FixedUpdate() {
 		wish_sprite_renderer.sprite = null;
@@ -95,9 +104,10 @@ public class Tree : MonoBehaviour {
 			hp = 5; //GetMaxHP();
 		}
 		
-		WishCloud.SetActive(active_wishes_remaining > 0);
+		WishCloud.SetActive(hp > 0 && active_wishes_remaining > 0);
 		
-		axe_shake_amount *= 0.9f;
+		shake_amount *= 0.9f;
+		growing_speed *= 0.9f;
 		
 		/*if (Time.time > 2f) {
 			test_timer -= Time.fixedDeltaTime;
@@ -118,23 +128,25 @@ public class Tree : MonoBehaviour {
 		
 		if (active_wishes_remaining == 0 && grown_percentage < 1f) { // should grow?
 			
-			//if (next_wish_timer < 0) {
-			//	active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
-			//	active_wishes_remaining = 3;
-			//}
+			if (next_wish_timer < 0) {
+				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
+				//active_wish = WishKind.Axe;
+				active_wishes_remaining = 3;
+			}
 			
 			int sprite_index = (int)(grown_percentage * sprites.Length);
 			sprite_renderer.sprite = sprites[sprite_index % sprites.Length];
 			
-			grown_percentage += 0.15f*Time.fixedDeltaTime;
-			//grown_percentage += 0.02f*Time.fixedDeltaTime;
+			//grown_percentage += 0.15f*Time.fixedDeltaTime;
+			grown_percentage += 1f*growing_speed*Time.fixedDeltaTime;
+			//print("grown_percentage " + grown_percentage);
 			
 			float s = 0.2f*grown_percentage + 1f;
 			root.transform.localScale = new Vector3(s, s, 1);	
-			WishCloud.transform.localPosition = new Vector3(0, grown_percentage * 3.2f + 0.9f, 0);
+			WishCloud.transform.localPosition = new Vector3(0.5f, grown_percentage * 3.2f + 1.5f, 0);
 		}
 		
-		root.transform.localRotation = Quaternion.Euler(0, 0, 20f * axe_shake_amount * Mathf.Sin(Time.time*25f));
+		root.transform.localRotation = Quaternion.Euler(0, 0, 20f * shake_amount * Mathf.Sin(Time.time*25f));
 		
 		//if (grown_percentage > 1) grown_percentage = 0; // reset
 	}

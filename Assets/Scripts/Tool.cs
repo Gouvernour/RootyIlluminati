@@ -107,13 +107,17 @@ public class Tool : MonoBehaviour
                 hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance * 5);
                 foreach (RaycastHit2D hit in hits)
                 {
-                    if(hit.collider.gameObject.tag == "Tree")
+                    if(hit.collider.transform != _parent)
                     {
-                        hit.collider.gameObject.GetComponent<Tree>().OnAxe();
-                    }
-                    if(hit.collider.gameObject.tag == "Player")
-                    {
-                        hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
+                        if(hit.collider.gameObject.tag == "Tree")
+                        {
+                            hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                        }
+                        if(hit.collider.gameObject.tag == "Player")
+                        {
+                            hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
+                        }
+
                     }
                 }
                 //If hit == Player Do Damage
@@ -131,7 +135,9 @@ public class Tool : MonoBehaviour
 					}
 				}
 				if (!found_hole) {
-					Instantiate(hole, transform.position, Quaternion.identity);
+					Vector3 new_hole_pos = transform.position;
+					new_hole_pos.y -= 1f;
+					Instantiate(hole, new_hole_pos, Quaternion.identity);
 				}
 				
 				break;
@@ -141,7 +147,9 @@ public class Tool : MonoBehaviour
 				
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Holee") {
-						colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant();
+						if (colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant()) {
+							break;
+						}
 					}
 				}
 				
@@ -149,6 +157,19 @@ public class Tool : MonoBehaviour
             //case ToolType.BugSpray:
             //    //Pesticide
             //    break;
+			
+			case ToolType.Fertilizer:
+				for (int i = 0; i < colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Tree") {
+						colliders[i].gameObject.GetComponent<Tree>().OnFertilize();
+					}
+					else if (colliders[i].gameObject.tag == "Playyer")
+					{
+						//colliders[i].gameObject.GetComponent<Movement>().Killed();
+					}
+				}
+				break;
+			
             case ToolType.BugSpray:
                 for (int i = 0; i < colliderCount; i++)
                 {
@@ -156,7 +177,7 @@ public class Tool : MonoBehaviour
                     {
                         colliders[i].gameObject.GetComponent<Tree>().OnSpray();
                     }
-                    else if (colliders[i].gameObject.tag == "Playyer")
+                    else if (colliders[i].gameObject.tag == "Player")
                     {
                         //colliders[i].gameObject.GetComponent<Movement>().Killed();
                     }
@@ -249,6 +270,10 @@ public class Tool : MonoBehaviour
                             default:
                                 break;
                         }
+                    }
+                    if(h.collider.gameObject.tag == "Wall")
+                    {
+                        transform.position -= direction * Time.deltaTime * 500;
                     }
 
                     _parent = null;
