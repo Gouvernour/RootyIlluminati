@@ -94,9 +94,9 @@ public class ScoreManager : MonoBehaviour
             }
         }else
         {
-            TanookiScoreText.text = "Tanooki score: " + TanookiScore;
-            RaccoonScoreText.text = "Tanooki score: " + RaccoonScore;
-            Timer.text = timeLeft.ToString();
+            TanookiScoreText.text = TanookiScore.ToString();
+            RaccoonScoreText.text = RaccoonScore.ToString();
+            Timer.text = (timeLeft > 99) ? timeLeft.ToString().Substring(0, 3) : timeLeft.ToString().Substring(0, 2);
 
         }
     }
