@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public AnimatorController tanookiAnim;
     public AnimatorController raccoonAnim;
 
+    public string winner;
+
     private void Awake()
     {
         if (instance == null)
@@ -94,6 +96,12 @@ public class GameManager : MonoBehaviour
                 players[i].GetComponent<Movement>().enabled = true;
 
             }
+        }
+        else if (SceneManager.GetActiveScene().name == "EndScreen")
+        {
+            MenuScript menu = GameObject.Find("Canvas").GetComponent<MenuScript>();
+
+            menu.EndScreen(winner);
         }
 
 

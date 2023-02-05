@@ -734,14 +734,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647202417}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.24, y: -0.28, z: 0.49}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 581724531}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &647202419
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -887,7 +887,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -5987,14 +5987,6 @@ PrefabInstance:
       propertyPath: rayastDistance
       value: 0.8
       objectReference: {fileID: 0}
-    - target: {fileID: 2881396472502171518, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
-      propertyPath: eero_sprite_per_tool_type.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2881396472502171518, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
-      propertyPath: eero_sprite_per_tool_type.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: e0545e4c39ae53944a14b8b5ff27bf65, type: 3}
     - target: {fileID: 2881396472502171519, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
       propertyPath: m_Name
       value: Tool (5)
@@ -6897,14 +6889,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889975138}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.24, y: 0.93, z: 0.49}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 581724531}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &1889975140
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -7050,7 +7042,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -7494,7 +7486,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5707963
+      scalar: -1.5707963
       minScalar: 0
       maxCurve:
         serializedVersion: 2

@@ -92,10 +92,23 @@ MonoBehaviour:
   - {fileID: 1317739003, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
   - {fileID: -1439939111, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
   - {fileID: -523528430, guid: cc63d069fc302164ca3e2b52f1adecef, type: 3}
+  trunk_sprites:
+  - {fileID: -659128650, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 1934792158, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 1925798686, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: -380357948, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 1030802536, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  cut_top_sprites:
+  - {fileID: -1203616984, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: -731965020, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: -1730877167, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 350913337, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
+  - {fileID: 1365054481, guid: 3a99d0bf49f50be4b9197b0e72dcbfa5, type: 3}
   wish_sprites:
   - {fileID: -456339958, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 702292884, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 1009828014, guid: 5fcbefe690a67b94f9e0d4e1b3e9af39, type: 3}
+  cut_tree_top_object: {fileID: 1783947640824881142, guid: 81684289faebc4b4789078e2568b1196, type: 3}
 --- !u!212 &852694294201039680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -162,7 +175,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.2}
-  m_Size: {x: 0.34, y: 0.57}
+  m_Size: {x: 0.7, y: 0.84}
   m_Direction: 0
 --- !u!50 &4449262831785314884
 Rigidbody2D:
