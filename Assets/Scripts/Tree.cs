@@ -122,7 +122,7 @@ public class Tree : MonoBehaviour {
 			// dead tree
 			fallen_over_ratio += 2f*Time.fixedDeltaTime;
 			if (fallen_over_ratio > 1) fallen_over_ratio = 1;
-			
+			ScoreManager.instance.RemoveTree(this);
 			root.transform.localRotation = Quaternion.Euler(0, 0, fallen_over_ratio*90f);
 			return;
 		}
