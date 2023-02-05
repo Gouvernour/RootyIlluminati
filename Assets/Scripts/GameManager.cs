@@ -47,12 +47,12 @@ public class GameManager : MonoBehaviour
         if (players.Count % 2 == 0)
         {
             input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = tanookiAnim;
-            name = "Tanooki";
+            input.name = "Tanooki";
         }
         else
         {
             input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = raccoonAnim;
-            name = "Raccoon";
+            input.name = "Raccoon";
         }
 
         if (SceneManager.GetActiveScene().name == "PlayerSpawningTest")
