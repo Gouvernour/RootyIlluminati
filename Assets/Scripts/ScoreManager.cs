@@ -33,7 +33,7 @@ public class ScoreManager : MonoBehaviour
     List<GameObject> TeamRaccon = new List<GameObject>();
     List<c_Tree> RaccoonTrees = new List<c_Tree>();
     List<c_Tree> TanookiTrees = new List<c_Tree>();
-    bool tanookiPlanting;
+    public bool tanookiPlanting;
     static public ScoreManager instance;
     int TanookiScore= 0;
     int RaccoonScore = 0;
@@ -75,12 +75,25 @@ public class ScoreManager : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if(timeLeft <= 0)
         {
-            timeLeft = 0;
-            //SceneManager.LoadScene()
+            if(TanookiScore == RaccoonScore)
+            {
+                Timer.text = "Sudden Death";
+            }else
+            {
+
+                timeLeft = 0;
+                SceneManager.LoadScene("EndScreen");
+
+                SceneManager.sceneLoaded += GameManager.instance.OnSceneLoaded;
+
+            }
+        }else
+        {
+            TanookiScoreText.text = TanookiScore.ToString();
+            RaccoonScoreText.text = RaccoonScore.ToString();
+            Timer.text = (timeLeft > 99) ? timeLeft.ToString().Substring(0, 3) : timeLeft.ToString().Substring(0, 2);
+
         }
-        TanookiScoreText.text = TanookiScore.ToString();
-        RaccoonScoreText.text = RaccoonScore.ToString();
-        Timer.text = (timeLeft > 99) ? timeLeft.ToString().Substring(0, 3) : timeLeft.ToString().Substring(0, 2);
     }
 
     public void AddTree(Tree tree)
