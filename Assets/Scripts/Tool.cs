@@ -111,7 +111,7 @@ public class Tool : MonoBehaviour
                     {
                         if(hit.collider.gameObject.tag == "Tree")
                         {
-                            hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                            hit.collider.gameObject.GetComponent<Tree>().OnWater();
                         }
                         if(hit.collider.gameObject.tag == "Player")
                         {

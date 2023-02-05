@@ -1075,14 +1075,6 @@ PrefabInstance:
       propertyPath: tool
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 2881396472502171518, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
-      propertyPath: eero_sprite_per_tool_type.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2881396472502171518, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
-      propertyPath: eero_sprite_per_tool_type.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: e0545e4c39ae53944a14b8b5ff27bf65, type: 3}
     - target: {fileID: 2881396472502171519, guid: b76e31b704c6f004e80aa805a81b7f3c, type: 3}
       propertyPath: m_Name
       value: Tool (5)
