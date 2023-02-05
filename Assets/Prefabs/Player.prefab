@@ -157,6 +157,7 @@ MonoBehaviour:
   dashSpeed: 30
   knockBackDuration: 0.15
   knockBackSpeed: 40
+  currentTool: {fileID: 0}
   respawnDuration: 5
   spawnPoint: {fileID: 0}
   anim: {fileID: 1065152706476485184}
