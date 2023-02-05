@@ -77,7 +77,7 @@ public class ScoreManager : MonoBehaviour
         {
             if(TanookiScore == RaccoonScore)
             {
-                Timer.text = "Sudden Death"
+                Timer.text = "Sudden Death";
             }else
             {
 
