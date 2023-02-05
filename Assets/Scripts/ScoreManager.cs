@@ -90,7 +90,13 @@ public class ScoreManager : MonoBehaviour
                     obj.GetComponent<MenuScript>().text.text = "Tanookis!";
                 else
                     obj.GetComponent<MenuScript>().text.text = "Racoons!";
-
+                players.Clear();
+                TeamTanooki.Clear();
+                TeamRaccon.Clear();
+                RaccoonScore = 0;
+                TanookiScore = 0;
+                TanookiTrees.Clear();
+                RaccoonTrees.Clear();
             }
         }else
         {

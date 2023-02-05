@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
             input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = raccoonAnim;
             input.name = "Raccoon";
         }
-
+        ScoreManager.instance.SetPlayers();
         if (SceneManager.GetActiveScene().name == "PlayerSpawningTest")
         {
             input.GetComponent<Movement>().enabled = false;
