@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class c_Tree
 {
@@ -36,6 +39,11 @@ public class ScoreManager : MonoBehaviour
     int RaccoonScore = 0;
     int[] scoreValue = new int[5] {0, 1, 3, 5, 9};
 
+    public float roundTime = 120;
+    public TextMeshProUGUI Timer;
+    float timeLeft;
+    public TextMeshProUGUI TanookiScoreText;
+    public TextMeshProUGUI RaccoonScoreText;
 
 
     void Start()
@@ -58,12 +66,21 @@ public class ScoreManager : MonoBehaviour
             }
         }
         StartCoroutine(ScoreUpdates());
+        timeLeft = roundTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timeLeft -= Time.deltaTime;
+        if(timeLeft <= 0)
+        {
+            timeLeft = 0;
+            //SceneManager.LoadScene()
+        }
+        TanookiScoreText.text = "Tanooki score: " + TanookiScore;
+        RaccoonScoreText.text = "Tanooki score: " + RaccoonScore;
+        Timer.text = timeLeft.ToString();
     }
 
     public void AddTree(Tree tree)

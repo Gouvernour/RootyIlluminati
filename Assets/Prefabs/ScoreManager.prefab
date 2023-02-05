@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4282628655
+  m_fontColor: {r: 0.18431373, g: 0.7294118, b: 0.2627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -313,8 +313,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4282562862
+  m_fontColor: {r: 0.18091846, g: 0.7264151, b: 0.25965, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -418,13 +418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670d396bbeab7904584d496486ad3ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  TeamTanooki: []
-  TeamRaccon: []
-  tanookiPlanting: 0
-  TanookiScore: 0
-  RaccoonScore: 0
-  scoreValue: 0000000001000000030000000500000009000000
+  roundTime: 120
+  Timer: {fileID: 5066060046382249402}
+  TanookiScoreText: {fileID: 9131646803890484318}
+  RaccoonScoreText: {fileID: 771960542684264265}
 --- !u!1 &8542431172106800308
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,8 +497,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4282628655
+  m_fontColor: {r: 0.18431373, g: 0.7294118, b: 0.2627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
