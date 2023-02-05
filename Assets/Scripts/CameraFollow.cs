@@ -12,7 +12,6 @@ public class CameraFollow : MonoBehaviour
     public float borderX;
     public float borderY;
 
-    public Vector3 offset;
    
 
     // Update is called once per frame
@@ -21,7 +20,7 @@ public class CameraFollow : MonoBehaviour
         if (GameManager.instance.players.Count == 0)
             return;
 
-        Bounds bounds = new Bounds();
+        Bounds bounds = new Bounds(GameManager.instance.players[0].transform.position, Vector2.zero);
 
         foreach (GameObject p in GameManager.instance.players)
         {
@@ -29,8 +28,7 @@ public class CameraFollow : MonoBehaviour
         }
 
 
-
-        Vector3 desiredPosition = bounds.center + offset;
+        Vector3 desiredPosition = bounds.center;
         desiredPosition.y *= 2; // Mathf.Min(Mathf.Max(smoothPosition.y, -borderY), borderY);
         Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
