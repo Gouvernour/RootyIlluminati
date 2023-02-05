@@ -18,8 +18,12 @@ public class Tree : MonoBehaviour {
 	public GameObject WishCloud;
 	
 	public Sprite[] sprites;
+	public Sprite[] trunk_sprites;
+	public Sprite[] cut_top_sprites;
 	
 	public Sprite[] wish_sprites;
+	
+	public GameObject cut_tree_top_object;
 	
 	enum WishKind {
 		Water,
@@ -63,18 +67,27 @@ public class Tree : MonoBehaviour {
 	// when you axe, this goes to 1. When this goes to 0, reset HP.
 	float reset_hp_timer = 0;
 	int hp = 5;
-	float fallen_over_ratio = 0;
+	//float fallen_over_ratio = 0;
 	
 	//int GetMaxHP() {
 	//	return 5 + (int)(grown_percentage * 5f);
 	//}
 	
+	public int GetSpriteIndex() { return (int)(grown_percentage * sprites.Length); }
 	
 	public void OnAxe() {
 		//print("OnAxe");
 		reset_hp_timer = 1;
 		hp--;
 		//ReceiveTreatment(WishKind.Axe);
+		if (hp == 0) {
+			GameObject top = Instantiate(cut_tree_top_object, transform.position, Quaternion.identity);
+			top.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-3f, 3f), ForceMode2D.Impulse);
+			top.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-3f, 3f), 1f), ForceMode2D.Impulse);
+			top.GetComponent<SpriteRenderer>().sprite = cut_top_sprites[GetSpriteIndex()];
+			sprite_renderer.sprite = trunk_sprites[GetSpriteIndex()];
+		}
+		
 		shake_amount = 1;
 	}
 	
@@ -91,6 +104,7 @@ public class Tree : MonoBehaviour {
 	}
 	
 	//float test_timer = 1f;
+	
 	
 	void FixedUpdate() {
 		wish_sprite_renderer.sprite = null;
@@ -118,16 +132,18 @@ public class Tree : MonoBehaviour {
 			}
 		}*/
 		
+		int sprite_index = GetSpriteIndex();
+		
 		if (hp <= 0) {
 			// dead tree
-			fallen_over_ratio += 2f*Time.fixedDeltaTime;
-			if (fallen_over_ratio > 1) fallen_over_ratio = 1;
-			ScoreManager.instance.RemoveTree(this);
-			root.transform.localRotation = Quaternion.Euler(0, 0, fallen_over_ratio*90f);
+			//fallen_over_ratio += 2f*Time.fixedDeltaTime;
+			//if (fallen_over_ratio > 1) fallen_over_ratio = 1;
+			
+			//root.transform.localRotation = Quaternion.Euler(0, 0, fallen_over_ratio*90f);
+			
 			return;
 		}
 		
-		int sprite_index = (int)(grown_percentage * sprites.Length);
 		if (active_wishes_remaining == 0 && sprite_index < 4) { // should grow?
 			
 			if (next_wish_timer < 0) {
