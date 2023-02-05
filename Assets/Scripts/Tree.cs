@@ -81,7 +81,7 @@ public class Tree : MonoBehaviour {
 	//	return 5 + (int)(grown_percentage * 5f);
 	//}
 	
-	int stage = 0;
+	public int stage = 0;
 	
 	int GetSpriteIndex() {
 		int index = stage;
