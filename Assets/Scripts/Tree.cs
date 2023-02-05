@@ -24,7 +24,7 @@ public class Tree : MonoBehaviour {
 	enum WishKind {
 		Water,
 		Fertilize,
-		Axe,
+		//Axe,
 		Spray,
 	}
 	
@@ -70,10 +70,10 @@ public class Tree : MonoBehaviour {
 	
 	
 	public void OnAxe() {
-		print("OnAxe");
+		//print("OnAxe");
 		reset_hp_timer = 1;
 		hp--;
-		ReceiveTreatment(WishKind.Axe);
+		//ReceiveTreatment(WishKind.Axe);
 		shake_amount = 1;
 	}
 	
@@ -126,19 +126,19 @@ public class Tree : MonoBehaviour {
 			return;
 		}
 		
-		if (active_wishes_remaining == 0 && grown_percentage < 1f) { // should grow?
+		int sprite_index = (int)(grown_percentage * sprites.Length);
+		if (active_wishes_remaining == 0 && sprite_index < 4) { // should grow?
 			
 			if (next_wish_timer < 0) {
 				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
 				//active_wish = WishKind.Axe;
-				active_wishes_remaining = 3;
+				active_wishes_remaining = 1;
 			}
 			
-			int sprite_index = (int)(grown_percentage * sprites.Length);
 			sprite_renderer.sprite = sprites[sprite_index % sprites.Length];
 			
 			//grown_percentage += 0.15f*Time.fixedDeltaTime;
-			grown_percentage += 1f*growing_speed*Time.fixedDeltaTime;
+			grown_percentage += 1.25f*growing_speed*Time.fixedDeltaTime;
 			//print("grown_percentage " + grown_percentage);
 			
 			float s = 0.2f*grown_percentage + 1f;
