@@ -114,7 +114,7 @@ public class Movement : MonoBehaviour
         {
             if (currentTool != null)
             {
-                currentTool.Use(lastDir);
+                //currentTool.Use(lastDir);
                 if (currentTool.tool == ToolType.SeedBag)
                     ScoreManager.instance.TryPlant(gameObject);
                 currentTool.Use(lastDir); 
