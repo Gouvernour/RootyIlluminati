@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
     public float knockBackSpeed;
 
     //tools
-    Tool currentTool;
+    [HideInInspector] public Tool currentTool;
     bool useTriggered;
     bool usePressed;
     Tool toolBeneathYou;

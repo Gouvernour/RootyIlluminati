@@ -33,10 +33,15 @@ public class Tool : MonoBehaviour
 	float eero_tool_shake_amount = 0;
 	
 	public GameObject hole;
-	
+
+    float dissapearTimer;
+
+    SpriteRenderer rend;
+
     private void Start()
     {
-		GetComponent<SpriteRenderer>().sprite = eero_sprite_per_tool_type[(int)tool];
+        rend = GetComponent<SpriteRenderer>();
+		rend.sprite = eero_sprite_per_tool_type[(int)tool];
 		eero_localScale_start = transform.localScale.x;
 		
         if(col == null)
@@ -95,6 +100,17 @@ public class Tool : MonoBehaviour
                 main.startRotation = a - Mathf.PI / 2;
             }
 		}
+
+        if (rend.enabled == false)
+        {
+            dissapearTimer -= Time.deltaTime;
+            if (dissapearTimer <= 0)
+            {
+                rend.enabled = true;
+            }
+        }
+
+        
 	}
 	
     public void Use(Vector2 direction)
@@ -113,7 +129,7 @@ public class Tool : MonoBehaviour
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Tree") {
 						colliders[i].gameObject.GetComponent<Tree>().OnAxe();
-					}else if(colliders[i].gameObject.tag == "Playyer")
+					}else if (colliders[i].gameObject.tag == "Player" && colliders[i].transform != _parent)
                     {
                         colliders[i].gameObject.GetComponent<Movement>().Killed();
                     }
@@ -121,11 +137,15 @@ public class Tool : MonoBehaviour
 				
                 _parent.GetChild(0).GetComponent<Animator>().Play("Chop");
 
+                GetComponent<SpriteRenderer>().enabled = false;
+                dissapearTimer = 0.6f;
+
                 break;
             case ToolType.WaterGun:
                 //Water
 
-                hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance*7.5f);
+                //hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance*7.5f);
+                hits = Physics2D.CircleCastAll(transform.position, 0.4f, direction, rayastDistance*7.5f);
                 foreach (RaycastHit2D hit in hits)
                 {
                     if (hit.collider.transform != _parent)
@@ -212,7 +232,6 @@ public class Tool : MonoBehaviour
 
 
 
-
     public void Drop()
     {
         _parent = null;
@@ -270,7 +289,8 @@ public class Tool : MonoBehaviour
         }
         while (thrown)
         {
-            hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
+            //hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
+            hits = Physics2D.CircleCastAll(transform.position, 0.4f, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
                 if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject 
