@@ -25,16 +25,18 @@ public enum Team
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> players = new List<GameObject>();
-    [SerializeField] List<GameObject> TeamTanooki = new List<GameObject>();
-    [SerializeField] List<GameObject> TeamRaccon = new List<GameObject>();
-    [SerializeField] List<c_Tree> RaccoonTrees = new List<c_Tree>();
-    [SerializeField] List<c_Tree> TanookiTrees = new List<c_Tree>();
-    [SerializeField] bool tanookiPlanting;
-    [SerializeField] static public ScoreManager instance;
-    [SerializeField] int TanookiScore= 0;
-    [SerializeField] int RaccoonScore = 0;
-    [SerializeField] int[] scoreValue = new int[5] {0, 1, 3, 5, 9};
+    List<GameObject> players = new List<GameObject>();
+    List<GameObject> TeamTanooki = new List<GameObject>();
+    List<GameObject> TeamRaccon = new List<GameObject>();
+    List<c_Tree> RaccoonTrees = new List<c_Tree>();
+    List<c_Tree> TanookiTrees = new List<c_Tree>();
+    bool tanookiPlanting;
+    static public ScoreManager instance;
+    int TanookiScore= 0;
+    int RaccoonScore = 0;
+    int[] scoreValue = new int[5] {0, 1, 3, 5, 9};
+
+
 
     void Start()
     {
