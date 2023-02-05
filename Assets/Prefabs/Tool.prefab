@@ -107,7 +107,7 @@ MonoBehaviour:
   eero_sprite_per_tool_type:
   - {fileID: -424601795, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: -456339958, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
-  - {fileID: 702292884, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
+  - {fileID: 21300000, guid: 9bdd94e6d6fba3c48a927867743e06de, type: 3}
   - {fileID: 904911896, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 1652830909, guid: 26b88e0f0139ac946a82982ddc98eaa2, type: 3}
   - {fileID: 21300000, guid: d1eec1b0c0b817c409034f70a98aaf1b, type: 3}
