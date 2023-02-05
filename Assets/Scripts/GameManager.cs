@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
     Transform spawnPositionsParent;
 
     [HideInInspector] public List<GameObject> players = new List<GameObject>();
+
+    public AnimatorController tanookiAnim;
+    public AnimatorController raccoonAnim;
 
     private void Awake()
     {
@@ -39,6 +43,17 @@ public class GameManager : MonoBehaviour
 
         input.transform.position = spawnPositionsParent.GetChild(players.Count - 1).position;
         input.GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(players.Count - 1);
+
+        if (players.Count % 2 == 0)
+        {
+            input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = tanookiAnim;
+            input.name = "Tanooki";
+        }
+        else
+        {
+            input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = raccoonAnim;
+            input.name = "Raccoon";
+        }
 
         if (SceneManager.GetActiveScene().name == "PlayerSpawningTest")
         {

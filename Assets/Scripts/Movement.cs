@@ -56,8 +56,8 @@ public class Movement : MonoBehaviour
 
             if (moveDir.y < 0 && Mathf.Abs(moveDir.y) >= Mathf.Abs(moveDir.x)) anim.Play("RunFront1");
             else if (moveDir.y > 0 && Mathf.Abs(moveDir.y) >= Mathf.Abs(moveDir.x)) anim.Play("RunBack");
-            else if (moveDir.x > 0) anim.Play("RunRight");
-            else if (moveDir.x < 0) anim.Play("RunLeft");
+            else if (moveDir.x > 0 && name.Contains("Raccoon")) anim.Play("RunRight");
+            else if (moveDir.x < 0 && name.Contains("Raccoon")) anim.Play("RunLeft");
 
             if (moveDir == Vector2.zero) anim.Play("Idle");
 

@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
     public float borderX;
     public float borderY;
 
+    public Vector3 offset;
    
 
     // Update is called once per frame
@@ -29,11 +30,12 @@ public class CameraFollow : MonoBehaviour
 
 
 
-        Vector3 desiredPosition = bounds.center;
+        Vector3 desiredPosition = bounds.center + offset;
+        desiredPosition.y *= 2; // Mathf.Min(Mathf.Max(smoothPosition.y, -borderY), borderY);
         Vector3 smoothPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
         smoothPosition.x = Mathf.Min(Mathf.Max(smoothPosition.x, -borderX), borderX);
-        smoothPosition.y = Mathf.Min(Mathf.Max(smoothPosition.y, -borderY), borderY);
+        smoothPosition.y = Mathf.Min(Mathf.Max(smoothPosition.y, 0), borderY);
         smoothPosition.z = -10;
         transform.position = smoothPosition;
 
