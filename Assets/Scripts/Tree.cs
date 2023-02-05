@@ -48,7 +48,7 @@ public class Tree : MonoBehaviour {
 	void Start() {
 		tanookiTree = ScoreManager.instance.tanookiPlanting;
 		
-		next_wish_timer = 1f;//Random.Range(4f, 8f);
+		next_wish_timer = Random.Range(3f, 7f);
 		ScoreManager.instance.AddTree(this);
 	}
 	
@@ -62,11 +62,10 @@ public class Tree : MonoBehaviour {
 			
 			if (active_wishes_remaining == 0) {
 				// fulfilled the wish!
-				next_wish_timer = 1; //Random.Range(4f, 8f);
+				next_wish_timer = Random.Range(3f, 7f);
 			}
 		}
 	}
-	
 	
 	// when you axe, this goes to 1. When this goes to 0, reset HP.
 	float reset_hp_timer = 0;
