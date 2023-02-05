@@ -51,3 +51,63 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     sauce: {fileID: 0}
+  - name: Axe_Chopping
+    clip: {fileID: 8300000, guid: 904bc62b8355ab04ca047c73d09a3f11, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Axe_Player
+    clip: {fileID: 8300000, guid: 6ee2643dbd110964a8ecae95483cbb6a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Pick_Up
+    clip: {fileID: 8300000, guid: 0c5d0e24156aae44998569513f8caa3c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Item_Throw
+    clip: {fileID: 8300000, guid: d66d93f2dc8070148bec925bf71e4b18, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Walking
+    clip: {fileID: 8300000, guid: 66cef5d68d813594d922f1270c834bce, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Spray
+    clip: {fileID: 8300000, guid: 1c06714dfc9161346aa9d19b0f5b4e9c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Water
+    clip: {fileID: 8300000, guid: 66f9829179c367a4db47b67dde2d232d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 7f1c996d257580b43bda5886b2ed70f5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Tree_Growth
+    clip: {fileID: 8300000, guid: f033fd9da3cbdad41a58fc630c989827, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
+  - name: Dig
+    clip: {fileID: 8300000, guid: d11e7e69429113348bdc0d93896aa26c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    sauce: {fileID: 0}
