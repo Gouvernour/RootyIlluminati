@@ -38,6 +38,7 @@ public class Movement : MonoBehaviour
     Tool currentTool;
     bool useTriggered;
     bool usePressed;
+    Tool toolBeneathYou;
 
     //hp and spawn
     bool dead;
@@ -73,9 +74,6 @@ public class Movement : MonoBehaviour
 	
     public void OnUse(InputAction.CallbackContext _ctx)
     {
-        if (!currentTool)
-            return;
-
         useTriggered = _ctx.action.triggered;
     }
 
@@ -114,7 +112,18 @@ public class Movement : MonoBehaviour
         //tool use things
         if (useTriggered && !usePressed)
         {
-            currentTool.Use(lastDir);
+            if (currentTool != null)
+            {
+                currentTool.Use(lastDir);
+            }
+            else
+            {
+                if (toolBeneathYou != null)
+                {
+                    currentTool = toolBeneathYou.PickUp(transform);
+                }
+            }
+
             usePressed = true;
         }
         else if (!useTriggered && usePressed)
@@ -213,12 +222,19 @@ public class Movement : MonoBehaviour
         anim.Play("Dead");
     }
 
-    public void KnockBack(Vector3 colPos)
+    public void KnockBack(Vector3 dir)
     {
         currentState = MovementState.knockBacked;
 
-        knockBackDir = (transform.position - colPos).normalized;
+        knockBackDir = dir;
         knockBackTimer = knockBackDuration;
+
+        if (currentTool != null)
+        {
+            currentTool.Drop();
+            currentTool = null;
+        }
+        
     }
 
     void Respawn()
@@ -238,9 +254,15 @@ public class Movement : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Tool")
         {
-            if (currentTool == null)
-                currentTool = collision.GetComponent<Tool>().PickUp(this.transform);
+            toolBeneathYou = collision.GetComponent<Tool>();
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Tool>() == toolBeneathYou)
+        {
+            toolBeneathYou = null;
+        }
+    }
 }

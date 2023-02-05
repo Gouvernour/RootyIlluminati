@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -19,6 +20,17 @@ public class CameraFollow : MonoBehaviour
     {
         if (GameManager.instance.players.Count == 0)
             return;
+
+
+        if (GameManager.instance.players.Count == 1)
+        {
+            Vector3 pos = GameManager.instance.players[0].transform.position;
+            pos.z = -10; 
+            transform.position = pos;
+            Camera.main.orthographicSize = maxSize;
+
+            return;
+        }
 
         Bounds bounds = new Bounds(GameManager.instance.players[0].transform.position, Vector2.zero);
 
