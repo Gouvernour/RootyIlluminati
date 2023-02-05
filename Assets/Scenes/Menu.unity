@@ -258,17 +258,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ebd3ef3a9ee83947806897016701cd1, type: 3}
---- !u!114 &558603291 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7679629281558909718, guid: 6ebd3ef3a9ee83947806897016701cd1, type: 3}
-  m_PrefabInstance: {fileID: 558603290}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c2e24edb7fe3a489d21ca3889ebf89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &846742060
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,8 +652,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 558603291}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1647446090}
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: OpenScene
         m_Mode: 5
         m_Arguments:
@@ -725,6 +714,7 @@ GameObject:
   - component: {fileID: 1647446088}
   - component: {fileID: 1647446087}
   - component: {fileID: 1647446086}
+  - component: {fileID: 1647446090}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -815,6 +805,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1647446090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647446085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b1e68842e4446439f833e40db887eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1744154670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,8 +1036,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 558603291}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1647446090}
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: OpenScene
         m_Mode: 5
         m_Arguments:

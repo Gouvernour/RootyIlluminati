@@ -114,7 +114,12 @@ public class Movement : MonoBehaviour
         {
             if (currentTool != null)
             {
-                currentTool.Use(lastDir);
+                currentTool.Use(lastDir); 
+                if (currentTool.tool == ToolType.WaterGun)
+                {
+                    currentTool.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                    currentTool.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+                }
             }
             else
             {
@@ -126,9 +131,22 @@ public class Movement : MonoBehaviour
 
             usePressed = true;
         }
+        else if (useTriggered && usePressed)
+        {
+            if (currentTool.tool == ToolType.WaterGun)
+            {
+                currentTool.Use(lastDir);
+            }
+        }
         else if (!useTriggered && usePressed)
         {
             usePressed = false;
+
+            if (currentTool.tool == ToolType.WaterGun)
+            {
+                currentTool.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+                currentTool.transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
+            }
         }
 
         if (dead)

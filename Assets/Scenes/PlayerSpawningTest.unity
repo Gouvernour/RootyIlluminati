@@ -240,17 +240,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &134159313 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7679629281558909718, guid: 6ebd3ef3a9ee83947806897016701cd1, type: 3}
-  m_PrefabInstance: {fileID: 7679629281491601607}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c2e24edb7fe3a489d21ca3889ebf89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &239182109
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +408,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 134159313}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 420819536}
+        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
         m_MethodName: OpenScene
         m_Mode: 5
         m_Arguments:
@@ -592,6 +581,7 @@ GameObject:
   - component: {fileID: 420819534}
   - component: {fileID: 420819533}
   - component: {fileID: 420819532}
+  - component: {fileID: 420819536}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -681,6 +671,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &420819536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420819531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b1e68842e4446439f833e40db887eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &699071183
 GameObject:
   m_ObjectHideFlags: 0
