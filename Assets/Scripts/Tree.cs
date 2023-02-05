@@ -144,7 +144,7 @@ public class Tree : MonoBehaviour {
 			return;
 		}
 		
-		if (active_wishes_remaining == 0 && sprite_index < 4) { // should grow?
+		if (active_wishes_remaining == 0 && sprite_index <= 4) { // should grow?
 			
 			if (next_wish_timer < 0) {
 				active_wish = (WishKind)Random.Range(0, System.Enum.GetNames(typeof(WishKind)).Length);
