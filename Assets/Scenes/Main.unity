@@ -6806,8 +6806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
-  tanookiAnim: {fileID: 9100000, guid: b9822b49b755490469954d7dc104e5d7, type: 2}
-  raccoonAnim: {fileID: 9100000, guid: 7761c5b0083621645a0891d51057c34c, type: 2}
+  tanookiAnim: {fileID: 1814119940551218880, guid: c366d25cc19343c4fb415668862767dd, type: 3}
+  raccoonAnim: {fileID: 4993732831472099638, guid: 48170baf5d0c52842aef15e43fbcf0f5, type: 3}
   winner: 
 --- !u!114 &1733740545
 MonoBehaviour:

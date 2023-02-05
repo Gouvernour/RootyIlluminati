@@ -1,10 +1,9 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using UnityEditor.Animations;
+using UnityEngine.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +13,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public List<GameObject> players = new List<GameObject>();
 
-    public AnimatorController tanookiAnim;
-    public AnimatorController raccoonAnim;
+    public GameObject tanookiAnim;
+    public GameObject raccoonAnim;
 
     public string winner;
 
@@ -55,12 +54,14 @@ public class GameManager : MonoBehaviour
 
         if (players.Count % 2 == 0)
         {
-            input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = tanookiAnim;
+            GameObject g = Instantiate(tanookiAnim, input.transform);
+            input.GetComponent<Movement>().anim = g.GetComponent<Animator>();
             input.name = "Tanooki";
         }
         else
         {
-            input.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = raccoonAnim;
+            GameObject g = Instantiate(raccoonAnim, input.transform);
+            input.GetComponent<Movement>().anim = g.GetComponent<Animator>();
             input.name = "Raccoon";
         }
         ScoreManager.instance.SetPlayers();
