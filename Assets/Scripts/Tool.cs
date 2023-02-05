@@ -26,8 +26,8 @@ public class Tool : MonoBehaviour
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
 	
-	public Collider2D eero_collider;
 	public Sprite[] eero_sprite_per_tool_type;
+	public Collider2D eero_collider;
 	Vector3 eero_parent_prev_frame_position;
 	float eero_localScale_start;
 	float eero_tool_shake_amount = 0;
@@ -66,7 +66,7 @@ public class Tool : MonoBehaviour
 			float len = Vector3.Magnitude(delta);
 			if (len > 0.001f) {
 				Vector3 dir = delta / len;
-				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f, 40f*Time.fixedDeltaTime);
+				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f + new Vector3(0, -0.1f, 0), 40f*Time.fixedDeltaTime);
 				transform.localScale = eero_localScale_start * (dir.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(-1, -1, 1));
 				
 				float theta = Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x);

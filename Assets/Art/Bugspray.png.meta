@@ -108,10 +108,10 @@ TextureImporter:
       name: Bugspray_0
       rect:
         serializedVersion: 2
-        x: 170
-        y: 164
-        width: 364
-        height: 584
+        x: 51
+        y: 48
+        width: 104
+        height: 169
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: Bugspray_1
       rect:
         serializedVersion: 2
-        x: 633
-        y: 148
-        width: 358
-        height: 804
+        x: 185
+        y: 43
+        width: 103
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
