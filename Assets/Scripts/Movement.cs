@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
@@ -126,7 +123,7 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                if (toolBeneathYou != null)
+                if (toolBeneathYou != null && toolBeneathYou._parent == null)
                 {
                     currentTool = toolBeneathYou.PickUp(transform);
                 }

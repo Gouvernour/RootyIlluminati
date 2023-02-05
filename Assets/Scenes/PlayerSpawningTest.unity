@@ -210,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 84536590}
+  - component: {fileID: 84536591}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -240,6 +241,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &84536591
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84536589}
+  m_Enabled: 1
+  m_SortingLayerID: -1282737427
+  m_SortingLayer: -1
+  m_SortingOrder: -1000
 --- !u!1 &239182109
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +694,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b1e68842e4446439f833e40db887eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tanooki: {fileID: 0}
+  raccoon: {fileID: 0}
+  endScreen: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &699071183
 GameObject:
   m_ObjectHideFlags: 0
