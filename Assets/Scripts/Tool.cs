@@ -250,13 +250,13 @@ public class Tool : MonoBehaviour
             hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
-                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
+                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject && h.collider.gameObject.tag != "Tool")
                 {
                     thrown = false;
                     //Do damage to hit player
                     if (h.collider.gameObject.tag == "Player")
                     {
-                        h.collider.gameObject.GetComponent<Movement>().KnockBack(transform.position);
+                        h.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
 
                         switch (tool)
                         {

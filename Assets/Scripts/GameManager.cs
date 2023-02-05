@@ -33,7 +33,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
+        if (SceneManager.GetActiveScene().name != "Menu")
+        {
+            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
+        }
+        else
+        {
+            GetComponent<PlayerInputManager>().enabled = false;
+        }
     }
 
     public void OnPlayerJoined(PlayerInput input)
@@ -62,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame(string name)
+    public void OpenScene(string name)
     {
         SceneManager.LoadScene(name);
 
@@ -72,17 +79,24 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //GetComponent<PlayerInputManager>().enabled = false;
 
-        spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
-
-        for (int i = 0; i < players.Count; i++)
+        if (SceneManager.GetActiveScene().name == "PlayerSpawningTest" || SceneManager.GetActiveScene().name == "Main")
         {
-            players[i].transform.position = spawnPositionsParent.GetChild(i).position;
-            players[i].GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(i);
+            spawnPositionsParent = GameObject.Find("SpawnPositions").transform;
+            GetComponent<PlayerInputManager>().enabled = true;
 
-            players[i].GetComponent<Movement>().enabled = true;
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].transform.position = spawnPositionsParent.GetChild(i).position;
+                players[i].GetComponent<Movement>().spawnPoint = spawnPositionsParent.GetChild(i);
+
+                players[i].GetComponent<Movement>().enabled = true;
+
+            }
         }
+
+
+        
     }
 
     private void OnDisable()
