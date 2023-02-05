@@ -88,8 +88,11 @@ public class Tool : MonoBehaviour
                     transform.GetChild(1).localRotation = Quaternion.Euler(0, 0, -90);
                 }
 
+                float a = Mathf.Atan2((delta / len).y, (delta / len).x);
                 var main = transform.GetChild(0).GetComponent<ParticleSystem>().main;
-                main.startRotation = transform.localEulerAngles.z;
+                main.startRotation = a - Mathf.PI/2;
+                main = transform.GetChild(1).GetComponent<ParticleSystem>().main;
+                main.startRotation = a - Mathf.PI / 2;
             }
 		}
 	}
