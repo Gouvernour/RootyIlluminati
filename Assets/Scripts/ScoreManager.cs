@@ -97,9 +97,9 @@ public class ScoreManager : MonoBehaviour
                 SceneManager.sceneLoaded += GameManager.instance.OnSceneLoaded;
                 GameObject obj = GameObject.Find("EndCanvas");
                 if (TanookiScore > RaccoonScore)
-                    obj.GetComponent<MenuScript>().text.text = "Tanookis!";
+                    tanookisWon = true;
                 else
-                    obj.GetComponent<MenuScript>().text.text = "Racoons!";
+                    tanookisWon = false;
                 players.Clear();
                 TeamTanooki.Clear();
                 TeamRaccon.Clear();
