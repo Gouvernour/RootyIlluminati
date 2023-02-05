@@ -269,6 +269,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManger
       objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d8ed3cd73a28f45c2b27ce1c159b1921, type: 3}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[1].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[3].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[4].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[6].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[8].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[9].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[10].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713315772137495521, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7713315772137495526, guid: be287dc1e63584a48a15b6ad69efc89e, type: 3}
       propertyPath: m_RootOrder
       value: 2

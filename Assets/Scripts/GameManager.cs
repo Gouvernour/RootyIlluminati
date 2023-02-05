@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
             input.GetComponent<Movement>().anim = g.GetComponent<Animator>();
             input.name = "Raccoon";
         }
-        ScoreManager.instance.SetPlayers();
         if (SceneManager.GetActiveScene().name == "PlayerSpawningTest")
         {
             input.GetComponent<Movement>().enabled = false;
@@ -82,6 +81,7 @@ public class GameManager : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Main")
             {
                 GetComponent<PlayerInputManager>().DisableJoining();
+                ScoreManager.instance.SetPlayers();
             }
             else
             {

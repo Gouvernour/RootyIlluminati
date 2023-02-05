@@ -5889,6 +5889,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 5715440376429981849, guid: bd5e24093cbbfd54aa8ad4b0fbeab0d6, type: 3}
+      propertyPath: roundTime
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 6562011989990902079, guid: bd5e24093cbbfd54aa8ad4b0fbeab0d6, type: 3}
       propertyPath: m_Name
       value: ScoreManager

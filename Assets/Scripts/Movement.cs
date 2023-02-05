@@ -49,6 +49,11 @@ public class Movement : MonoBehaviour
     {
         if (currentState == MovementState.still || currentState == MovementState.moving)
         {
+            if (currentState == MovementState.still)
+            {
+                AudioManager.instance.Play("Walking");
+
+            }
             currentState = MovementState.moving;
             moveDir = _ctx.ReadValue<Vector2>().normalized;
 
@@ -57,8 +62,13 @@ public class Movement : MonoBehaviour
             else if (moveDir.x > 0 && name.Contains("Raccoon")) anim.Play("RunRight");
             else if (moveDir.x < 0 && name.Contains("Raccoon")) anim.Play("RunLeft");
 
-            if (moveDir == Vector2.zero) anim.Play("Idle");
+            if (moveDir == Vector2.zero)
+            {
+                currentState = MovementState.still;
 
+                AudioManager.instance.Stop("Walking");
+                anim.Play("Idle");
+            }
         }
     }
 
@@ -111,7 +121,6 @@ public class Movement : MonoBehaviour
         {
             if (currentTool != null)
             {
-                currentTool.Use(lastDir);
                 if (currentTool.tool == ToolType.SeedBag)
                     ScoreManager.instance.TryPlant(gameObject);
                 currentTool.Use(lastDir); 
@@ -119,6 +128,7 @@ public class Movement : MonoBehaviour
                 {
                     currentTool.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                     currentTool.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+                    AudioManager.instance.Play("Water");
                 }
             }
             else
@@ -152,6 +162,7 @@ public class Movement : MonoBehaviour
                 {
                     currentTool.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                     currentTool.transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
+                    AudioManager.instance.Stop("Water");
                 }
             }
                 
@@ -237,6 +248,7 @@ public class Movement : MonoBehaviour
         dashTimer = dashDuration;
         dashPressed = true;
         GetComponent<BoxCollider2D>().isTrigger = true;
+        AudioManager.instance.Play("Dash");
     }
 
 
@@ -246,6 +258,7 @@ public class Movement : MonoBehaviour
         respawnTimer = respawnDuration;
         rBod.velocity = Vector2.zero;
         anim.Play("Dead");
+        AudioManager.instance.Play("Axe_Player");
     }
 
     public void KnockBack(Vector3 dir)
