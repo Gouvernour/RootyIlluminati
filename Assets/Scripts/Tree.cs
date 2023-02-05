@@ -59,8 +59,11 @@ public class Tree : MonoBehaviour {
 			shake_amount = 2f;
 			active_wishes_remaining--;
 			growing_speed = 1;
-			
-			if (active_wishes_remaining == 0) {
+
+
+            AudioManager.instance.Play("Tree_Growth");
+
+            if (active_wishes_remaining == 0) {
 				// fulfilled the wish!
 				next_wish_timer = Random.Range(3f, 7f);
 			}

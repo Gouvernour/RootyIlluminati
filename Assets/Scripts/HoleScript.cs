@@ -33,7 +33,9 @@ public class HoleScript : MonoBehaviour
 			is_complete = true;
 			hole_sprite.GetComponent<SpriteRenderer>().sprite = dug_hole_sprite;
 		}
-	}
+
+        AudioManager.instance.Play("Dig");
+    }
 	
 	// Start is called before the first frame update
 	void Start()

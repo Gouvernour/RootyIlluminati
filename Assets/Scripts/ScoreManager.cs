@@ -47,13 +47,22 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI RaccoonScoreText;
 
 
-    void Start()
+    private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
         else
+        {
             Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        
         GameObject[] gameobjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject Object in gameobjects)
         {

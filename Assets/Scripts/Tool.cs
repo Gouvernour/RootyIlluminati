@@ -137,6 +137,8 @@ public class Tool : MonoBehaviour
 				
                 _parent.GetChild(0).GetComponent<Animator>().Play("Chop");
 
+                AudioManager.instance.Play("Axe_Chopping");
+
                 GetComponent<SpriteRenderer>().enabled = false;
                 dissapearTimer = 0.6f;
 
@@ -172,7 +174,8 @@ public class Tool : MonoBehaviour
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Holee") {
 						colliders[i].gameObject.GetComponent<HoleScript>().Grow();
-						found_hole = true;
+
+                        found_hole = true;
 					}
 				}
 				if (!found_hole) {
@@ -212,6 +215,8 @@ public class Tool : MonoBehaviour
 				break;
 			
             case ToolType.BugSpray:
+
+                AudioManager.instance.Play("Spray");
                 for (int i = 0; i < colliderCount; i++)
                 {
                     if (colliders[i].gameObject.tag == "Tree")
@@ -248,16 +253,21 @@ public class Tool : MonoBehaviour
 
         _parent.GetChild(0).GetComponent<Animator>().Play("Pick");
 
+
+        AudioManager.instance.Play("Pick_Up");
+
         return this;
     }
 
     public void Throw(Transform parent, Vector2 direction)
     {
-        if(_parent == parent)
+        if (_parent == parent)
         {
             StartCoroutine(Throwing(direction));
 
             _parent.GetChild(0).GetComponent<Animator>().Play("Throw");
+
+            AudioManager.instance.Play("Item_Throw");
         }
     }
 
