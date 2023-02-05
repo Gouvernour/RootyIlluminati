@@ -107,13 +107,17 @@ public class Tool : MonoBehaviour
                 hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance * 5);
                 foreach (RaycastHit2D hit in hits)
                 {
-                    if(hit.collider.gameObject.tag == "Tree")
+                    if(hit.collider.transform != _parent)
                     {
-                        hit.collider.gameObject.GetComponent<Tree>().OnAxe();
-                    }
-                    if(hit.collider.gameObject.tag == "Player")
-                    {
-                        hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
+                        if(hit.collider.gameObject.tag == "Tree")
+                        {
+                            hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                        }
+                        if(hit.collider.gameObject.tag == "Player")
+                        {
+                            hit.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
+                        }
+
                     }
                 }
                 //If hit == Player Do Damage
@@ -146,9 +150,6 @@ public class Tool : MonoBehaviour
 				}
 				
 				break;
-            //case ToolType.BugSpray:
-            //    //Pesticide
-            //    break;
             case ToolType.BugSpray:
                 for (int i = 0; i < colliderCount; i++)
                 {
@@ -156,7 +157,7 @@ public class Tool : MonoBehaviour
                     {
                         colliders[i].gameObject.GetComponent<Tree>().OnSpray();
                     }
-                    else if (colliders[i].gameObject.tag == "Playyer")
+                    else if (colliders[i].gameObject.tag == "Player")
                     {
                         //colliders[i].gameObject.GetComponent<Movement>().Killed();
                     }
