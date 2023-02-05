@@ -26,8 +26,8 @@ public class Tool : MonoBehaviour
     [SerializeField] Quaternion StandardRotation = Quaternion.identity;
 	
 	
-	public Collider2D eero_collider;
 	public Sprite[] eero_sprite_per_tool_type;
+	public Collider2D eero_collider;
 	Vector3 eero_parent_prev_frame_position;
 	float eero_localScale_start;
 	float eero_tool_shake_amount = 0;
@@ -66,7 +66,7 @@ public class Tool : MonoBehaviour
 			float len = Vector3.Magnitude(delta);
 			if (len > 0.001f) {
 				Vector3 dir = delta / len;
-				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f, 40f*Time.fixedDeltaTime);
+				transform.position = Vector3.Lerp(transform.position, _parent.position + dir * 0.8f + new Vector3(0, -0.1f, 0), 40f*Time.fixedDeltaTime);
 				transform.localScale = eero_localScale_start * (dir.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(-1, -1, 1));
 				
 				float theta = Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x);
@@ -111,7 +111,7 @@ public class Tool : MonoBehaviour
                     {
                         if(hit.collider.gameObject.tag == "Tree")
                         {
-                            hit.collider.gameObject.GetComponent<Tree>().OnAxe();
+                            hit.collider.gameObject.GetComponent<Tree>().OnWater();
                         }
                         if(hit.collider.gameObject.tag == "Player")
                         {
@@ -135,7 +135,9 @@ public class Tool : MonoBehaviour
 					}
 				}
 				if (!found_hole) {
-					Instantiate(hole, transform.position, Quaternion.identity);
+					Vector3 new_hole_pos = transform.position;
+					new_hole_pos.y -= 1f;
+					Instantiate(hole, new_hole_pos, Quaternion.identity);
 				}
 				
 				break;
@@ -145,11 +147,29 @@ public class Tool : MonoBehaviour
 				
 				for (int i=0; i<colliderCount; i++) {
 					if (colliders[i].gameObject.tag == "Holee") {
-						colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant();
+						if (colliders[i].gameObject.GetComponent<HoleScript>().TryToPlant()) {
+							break;
+						}
 					}
 				}
 				
 				break;
+            //case ToolType.BugSpray:
+            //    //Pesticide
+            //    break;
+			
+			case ToolType.Fertilizer:
+				for (int i = 0; i < colliderCount; i++) {
+					if (colliders[i].gameObject.tag == "Tree") {
+						colliders[i].gameObject.GetComponent<Tree>().OnFertilize();
+					}
+					else if (colliders[i].gameObject.tag == "Playyer")
+					{
+						//colliders[i].gameObject.GetComponent<Movement>().Killed();
+					}
+				}
+				break;
+			
             case ToolType.BugSpray:
                 for (int i = 0; i < colliderCount; i++)
                 {
@@ -230,13 +250,13 @@ public class Tool : MonoBehaviour
             hits = Physics2D.RaycastAll(transform.position, direction, rayastDistance);
             foreach (RaycastHit2D h in hits)
             {
-                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject)
+                if (h && h.collider.gameObject.transform != _parent && h.collider.gameObject != gameObject && h.collider.gameObject.tag != "Tool")
                 {
                     thrown = false;
                     //Do damage to hit player
                     if (h.collider.gameObject.tag == "Player")
                     {
-                        h.collider.gameObject.GetComponent<Movement>().KnockBack(transform.position);
+                        h.collider.gameObject.GetComponent<Movement>().KnockBack(direction);
 
                         switch (tool)
                         {
