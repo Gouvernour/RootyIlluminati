@@ -33,7 +33,8 @@ public class ScoreManager : MonoBehaviour
     List<GameObject> TeamRaccon = new List<GameObject>();
     List<c_Tree> RaccoonTrees = new List<c_Tree>();
     List<c_Tree> TanookiTrees = new List<c_Tree>();
-    public bool tanookiPlanting;
+    public bool tanookiPlanting = false;
+    public bool tanookisWon = false;
     static public ScoreManager instance;
     int TanookiScore= 0;
     int RaccoonScore = 0;
@@ -185,8 +186,8 @@ public class ScoreManager : MonoBehaviour
             tempScore += scoreValue[t.tree.stage];
         }
         RaccoonScore = tempScore;
-        print("Tanooki score = " + TanookiScore);
-        print("Racoon score = " + RaccoonScore);
+        //print("Tanooki score = " + TanookiScore);
+        //print("Racoon score = " + RaccoonScore);
         tempScore = 0;
         StartCoroutine(ScoreUpdates());
     }

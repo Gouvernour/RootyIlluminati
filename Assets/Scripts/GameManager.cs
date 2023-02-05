@@ -101,7 +101,10 @@ public class GameManager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name == "EndScreen")
         {
             MenuScript menu = GameObject.Find("Canvas").GetComponent<MenuScript>();
-
+            if (ScoreManager.instance.tanookisWon)
+                winner = "Tanooki";
+            else
+                winner = "Racoon";
             menu.EndScreen(winner);
         }
 
